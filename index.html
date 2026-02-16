@@ -48,6 +48,50 @@
            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
        }
 
+       /* Apple Ultra Sidebar Style */
+       .ios-sidebar {
+           background: rgba(255, 255, 255, 0.85);
+           backdrop-filter: blur(24px) saturate(180%);
+           -webkit-backdrop-filter: blur(24px) saturate(180%);
+           border-left: 1px solid rgba(0,0,0,0.05);
+       }
+       .dark .ios-sidebar {
+           background: rgba(20, 20, 22, 0.85);
+           border-left: 1px solid rgba(255,255,255,0.05);
+       }
+       
+       .ios-group {
+           background: rgba(255, 255, 255, 0.5);
+           border-radius: 12px;
+           overflow: hidden;
+       }
+       .dark .ios-group {
+           background: rgba(44, 44, 46, 0.5);
+       }
+
+       .ios-item {
+           position: relative;
+           transition: background-color 0.2s;
+       }
+       .ios-item:active {
+           background-color: rgba(0,0,0,0.05);
+       }
+       .dark .ios-item:active {
+           background-color: rgba(255,255,255,0.1);
+       }
+       .ios-item:not(:last-child)::after {
+           content: '';
+           position: absolute;
+           bottom: 0;
+           left: 56px; /* Icon width + padding */
+           right: 0;
+           height: 1px;
+           background-color: rgba(0,0,0,0.1);
+       }
+       .dark .ios-item:not(:last-child)::after {
+           background-color: rgba(255,255,255,0.1);
+       }
+
        .glass-header {
            background: rgba(255, 255, 255, 0.7);
            backdrop-filter: blur(16px);
@@ -80,7 +124,7 @@
        .widget-item:nth-child(3) { transition-delay: 0s; }
 
        .sidebar-transition {
-           transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+           transition: transform 0.4s cubic-bezier(0.32, 0.72, 0, 1);
        }
        
        /* Custom scrollbar */
@@ -116,6 +160,14 @@
                        radial-gradient(circle at 100% 100%, #831843 0%, transparent 50%),
                        radial-gradient(circle at 0% 100%, #14532d 0%, transparent 50%);
            opacity: 0.2;
+       }
+       
+       /* Dropdown Animation details */
+       details > summary {
+           list-style: none;
+       }
+       details > summary::-webkit-details-marker {
+           display: none;
        }
    </style>
    <script>
@@ -217,81 +269,125 @@
        </button>
    </div>
 
-   <!-- === Sidebar / Mini Ultra App === -->
-   <div id="sidebar-overlay" class="fixed inset-0 bg-black/30 z-40 hidden backdrop-blur-md transition-opacity" aria-hidden="true"></div>
-   <aside id="sidebar-menu" class="glass-panel fixed top-0 right-0 h-full w-80 z-50 transform translate-x-full sidebar-transition flex flex-col border-l border-white/40" role="dialog" aria-modal="true" aria-label="Menu chính">
+   <!-- === Sidebar / Apple Style Ultra === -->
+   <div id="sidebar-overlay" class="fixed inset-0 bg-black/20 z-40 hidden backdrop-blur-sm transition-opacity" aria-hidden="true"></div>
+   <aside id="sidebar-menu" class="ios-sidebar fixed top-0 right-0 h-full w-[320px] max-w-[85vw] z-50 transform translate-x-full sidebar-transition flex flex-col shadow-2xl" role="dialog" aria-modal="true" aria-label="Menu chính">
        
        <!-- Sidebar Header -->
-       <div class="p-5 border-b border-gray-100/30 flex justify-between items-center bg-white/20">
-           <h2 class="font-bold text-lg text-brand-700 dark:text-brand-300">Menu Ứng Dụng</h2>
-           <button id="close-menu-btn" class="p-2 rounded-full hover:bg-white/40 dark:hover:bg-gray-700/40 text-gray-500 transition-colors" aria-label="Đóng menu">
-               <i class="fas fa-times text-xl"></i>
+       <div class="px-6 pt-12 pb-4 flex justify-between items-end">
+           <h2 class="font-bold text-3xl text-gray-900 dark:text-white tracking-tight">Menu</h2>
+           <button id="close-menu-btn" class="w-8 h-8 rounded-full bg-gray-200/50 dark:bg-gray-700/50 flex items-center justify-center text-gray-500 hover:bg-gray-300/50 transition-colors" aria-label="Đóng menu">
+               <i class="fas fa-times text-sm"></i>
            </button>
        </div>
 
        <!-- Sidebar Content -->
-       <nav class="flex-1 overflow-y-auto p-4 space-y-2">
-           <!-- Quick Actions -->
-           <div class="grid grid-cols-2 gap-3 mb-4">
-               <a href="tel:0989595533" class="glass-panel flex flex-col items-center justify-center p-3 rounded-xl bg-green-50/50 text-green-600 hover:bg-green-100/50 transition-all">
-                   <i class="fas fa-phone-alt mb-2 text-xl"></i>
-                   <span class="text-xs font-semibold">Gọi Ngay</span>
-               </a>
-               <a href="https://zalo.me/0989595533" target="_blank" rel="noopener noreferrer" class="glass-panel flex flex-col items-center justify-center p-3 rounded-xl bg-blue-50/50 text-blue-600 hover:bg-blue-100/50 transition-all">
-                   <i class="fas fa-comment-dots mb-2 text-xl"></i>
-                   <span class="text-xs font-semibold">Zalo</span>
-               </a>
-           </div>
+       <nav class="flex-1 overflow-y-auto px-4 pb-10 space-y-6">
+           
+           <!-- Mini App Ultra: Opening Hours (Widget Style) -->
+           <div class="mb-4 mx-1 p-6 rounded-[1.5rem] bg-white/40 dark:bg-gray-800/40 backdrop-blur-md border border-white/20 shadow-xl flex flex-col items-center text-center relative overflow-hidden group">
+               <!-- Decor Background -->
+               <div class="absolute -top-10 -left-10 w-32 h-32 bg-brand-500/20 rounded-full blur-2xl group-hover:bg-brand-500/30 transition-colors"></div>
+               <div class="absolute -bottom-10 -right-10 w-32 h-32 bg-purple-500/20 rounded-full blur-2xl group-hover:bg-purple-500/30 transition-colors"></div>
 
-           <!-- Opening Hours Added Here -->
-           <div class="flex items-center justify-between px-4 py-3 mb-6 bg-white/40 dark:bg-gray-800/40 rounded-lg border border-white/20 dark:border-gray-700 shadow-sm backdrop-blur-sm">
-               <div class="flex items-center gap-2">
-                   <i class="fas fa-clock text-brand-500 animate-pulse"></i>
-                   <span class="text-sm font-medium text-gray-700 dark:text-gray-300">Giờ mở cửa</span>
+               <div class="relative z-10">
+                   <div class="inline-flex items-center justify-center w-14 h-14 rounded-full bg-gradient-to-br from-orange-400 to-pink-500 text-white shadow-lg mb-3 transform group-hover:scale-110 transition-transform">
+                       <i class="fas fa-clock text-2xl"></i>
+                   </div>
+                   <div class="text-sm font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wide mb-1">Giờ Mở Cửa</div>
+                   <div class="text-3xl font-black text-gray-800 dark:text-white tracking-tighter">9h - 21h</div>
+                   <div class="mt-2 text-xs font-bold text-green-600 dark:text-green-400 bg-green-100/80 dark:bg-green-900/30 px-3 py-1 rounded-full inline-flex items-center gap-1.5 backdrop-blur-sm border border-green-200 dark:border-green-800">
+                       <span class="relative flex h-2 w-2">
+                         <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                         <span class="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+                       </span>
+                       Đang Hoạt Động
+                   </div>
                </div>
-               <span class="text-sm font-bold text-brand-700 dark:text-brand-300">9h - 21h</span>
            </div>
 
-           <!-- Menu Links -->
-           <ul class="space-y-1">
-               <li>
-                   <a href="#" class="block px-4 py-3 rounded-lg hover:bg-white/40 dark:hover:bg-gray-800/40 transition-colors font-medium text-gray-700 dark:text-gray-200">
-                       <i class="fas fa-home w-8 text-brand-500"></i> Trang Chủ
-                   </a>
-               </li>
-               <li>
-                   <a href="#about" class="block px-4 py-3 rounded-lg hover:bg-white/40 dark:hover:bg-gray-800/40 transition-colors font-medium text-gray-700 dark:text-gray-200">
-                       <i class="fas fa-info-circle w-8 text-purple-500"></i> Giới Thiệu
-                   </a>
-               </li>
-               <li>
-                   <a href="#pricing" class="block px-4 py-3 rounded-lg hover:bg-white/40 dark:hover:bg-gray-800/40 transition-colors font-medium text-gray-700 dark:text-gray-200">
-                       <i class="fas fa-tags w-8 text-pink-500"></i> Bảng Giá Thuê
-                   </a>
-               </li>
-               <li>
-                   <a href="#location" class="block px-4 py-3 rounded-lg hover:bg-white/40 dark:hover:bg-gray-800/40 transition-colors font-medium text-gray-700 dark:text-gray-200">
-                       <i class="fas fa-map-marked-alt w-8 text-orange-500"></i> Định Vị Cửa Hàng
-                   </a>
-               </li>
-               <li>
-                   <a href="#faq" class="block px-4 py-3 rounded-lg hover:bg-white/40 dark:hover:bg-gray-800/40 transition-colors font-medium text-gray-700 dark:text-gray-200">
-                       <i class="fas fa-question-circle w-8 text-teal-500"></i> Hỏi Đáp (FAQ)
-                   </a>
-               </li>
-           </ul>
+           <!-- Group 1: Main -->
+           <div class="ios-group">
+               <a href="https://chothuexemayohanoi.github.io/vanchinh/" class="ios-item flex items-center px-4 py-3.5 text-gray-800 dark:text-white">
+                   <div class="w-8 h-8 rounded-lg bg-blue-500 flex items-center justify-center text-white mr-3 shadow-sm">
+                       <i class="fas fa-home text-sm"></i>
+                   </div>
+                   <span class="font-medium text-[15px] flex-1">Trang Chủ</span>
+                   <i class="fas fa-chevron-right text-gray-400 text-xs"></i>
+               </a>
+               <a href="gioithieu.html" class="ios-item flex items-center px-4 py-3.5 text-gray-800 dark:text-white">
+                   <div class="w-8 h-8 rounded-lg bg-purple-500 flex items-center justify-center text-white mr-3 shadow-sm">
+                       <i class="fas fa-info text-sm"></i>
+                   </div>
+                   <span class="font-medium text-[15px] flex-1">Giới Thiệu</span>
+                   <i class="fas fa-chevron-right text-gray-400 text-xs"></i>
+               </a>
+               <a href="banggia.html" class="ios-item flex items-center px-4 py-3.5 text-gray-800 dark:text-white">
+                   <div class="w-8 h-8 rounded-lg bg-pink-500 flex items-center justify-center text-white mr-3 shadow-sm">
+                       <i class="fas fa-tags text-sm"></i>
+                   </div>
+                   <span class="font-medium text-[15px] flex-1">Bảng Giá</span>
+                   <i class="fas fa-chevron-right text-gray-400 text-xs"></i>
+               </a>
+           </div>
 
-           <!-- Promo Box Glass -->
-           <div class="mt-6 p-4 rounded-xl glass-panel bg-gradient-to-br from-brand-500/80 to-purple-600/80 text-white shadow-lg border-none">
-               <div class="flex items-center gap-3 mb-2">
-                   <i class="fas fa-gift text-yellow-300 text-xl"></i>
-                   <span class="font-bold text-sm">Ưu Đãi Hôm Nay</span>
+           <!-- Group 2: Services -->
+           <div class="space-y-2">
+               <h3 class="px-4 text-xs font-semibold text-gray-500 uppercase tracking-wider">Dịch Vụ</h3>
+               <div class="ios-group">
+                   <details class="group">
+                       <summary class="ios-item flex items-center px-4 py-3.5 text-gray-800 dark:text-white cursor-pointer">
+                           <div class="w-8 h-8 rounded-lg bg-orange-500 flex items-center justify-center text-white mr-3 shadow-sm">
+                               <i class="fas fa-motorcycle text-sm"></i>
+                           </div>
+                           <span class="font-medium text-[15px] flex-1">Chọn Khu Vực</span>
+                           <i class="fas fa-chevron-down transition-transform duration-200 group-open:rotate-180 text-gray-400 text-xs"></i>
+                       </summary>
+                       <ul class="pl-14 pr-4 py-2 space-y-3 bg-gray-50/50 dark:bg-gray-800/50">
+                           <li><a href="longbien.html" class="block text-sm text-gray-600 dark:text-gray-300">Long Biên</a></li>
+                           <li><a href="gialam.html" class="block text-sm text-gray-600 dark:text-gray-300">Gia Lâm</a></li>
+                           <li><a href="hoankiem.html" class="block text-sm text-gray-600 dark:text-gray-300">Hoàn Kiếm</a></li>
+                           <li><a href="phoco.html" class="block text-sm text-gray-600 dark:text-gray-300">Phố Cổ</a></li>
+                           <li><a href="xedien.html" class="block text-sm text-gray-600 dark:text-gray-300">Xe Điện</a></li>
+                       </ul>
+                   </details>
+                   
+                   <details class="group">
+                       <summary class="ios-item flex items-center px-4 py-3.5 text-gray-800 dark:text-white cursor-pointer">
+                           <div class="w-8 h-8 rounded-lg bg-teal-500 flex items-center justify-center text-white mr-3 shadow-sm">
+                               <i class="fas fa-clock text-sm"></i>
+                           </div>
+                           <span class="font-medium text-[15px] flex-1">Hình Thức Thuê</span>
+                           <i class="fas fa-chevron-down transition-transform duration-200 group-open:rotate-180 text-gray-400 text-xs"></i>
+                       </summary>
+                       <ul class="pl-14 pr-4 py-2 space-y-3 bg-gray-50/50 dark:bg-gray-800/50">
+                           <li><a href="thuengay.html" class="block text-sm text-gray-600 dark:text-gray-300">Thuê Theo Ngày</a></li>
+                           <li><a href="thuetuan.html" class="block text-sm text-gray-600 dark:text-gray-300">Thuê Theo Tuần</a></li>
+                           <li><a href="thuethang.html" class="block text-sm text-gray-600 dark:text-gray-300">Thuê Theo Tháng</a></li>
+                       </ul>
+                   </details>
                </div>
-               <p class="text-xs opacity-90 mb-3 text-white">Giảm 10% khi thuê từ 5 ngày trở lên. Tặng kèm 2 mũ bảo hiểm + áo mưa.</p>
-               <button onclick="document.getElementById('calculator').scrollIntoView({behavior: 'smooth'})" class="w-full py-2 bg-white text-brand-600 rounded-lg text-xs font-bold hover:bg-gray-50 transition-colors shadow-sm">
-                   Đặt Xe Ngay
-               </button>
            </div>
+
+           <!-- Group 3: Support -->
+           <div class="space-y-2">
+               <h3 class="px-4 text-xs font-semibold text-gray-500 uppercase tracking-wider">Hỗ Trợ</h3>
+               <div class="ios-group">
+                   <a href="faq.html" class="ios-item flex items-center px-4 py-3.5 text-gray-800 dark:text-white">
+                       <div class="w-8 h-8 rounded-lg bg-gray-500 flex items-center justify-center text-white mr-3 shadow-sm">
+                           <i class="fas fa-question text-sm"></i>
+                       </div>
+                       <span class="font-medium text-[15px] flex-1">Hỏi Đáp</span>
+                   </a>
+                   <a href="lienhe.html" class="ios-item flex items-center px-4 py-3.5 text-gray-800 dark:text-white">
+                       <div class="w-8 h-8 rounded-lg bg-indigo-500 flex items-center justify-center text-white mr-3 shadow-sm">
+                           <i class="fas fa-envelope text-sm"></i>
+                       </div>
+                       <span class="font-medium text-[15px] flex-1">Liên Hệ</span>
+                   </a>
+               </div>
+           </div>
+           
        </nav>
    </aside>
 
@@ -560,59 +656,89 @@
        </article>
    </main>
 
-   <!-- === Footer === -->
-   <footer class="bg-gray-900/90 text-gray-300 pt-16 pb-8 border-t border-gray-800 backdrop-blur-lg relative z-10">
+   <!-- === Footer (Full Menu Integration) === -->
+   <footer class="bg-gray-900/95 text-gray-300 pt-16 pb-8 border-t border-gray-800 backdrop-blur-lg relative z-10">
        <div class="container mx-auto px-4">
-           <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
-               <!-- Brand Info -->
-               <div class="space-y-4">
+           <!-- Footer Grid System: 2 cols Mobile, 3 cols Tablet, 5 cols Desktop -->
+           <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 mb-12">
+               
+               <!-- Col 1: Brand Info (Full width on Mobile small, but here kept as col to save space or adjust) -->
+               <div class="col-span-2 md:col-span-1 lg:col-span-1 space-y-4">
                    <h3 class="text-2xl font-bold text-white mb-2">Văn Chính<span class="text-brand-500">.</span></h3>
                    <p class="text-sm leading-relaxed text-gray-400">
-                       Đơn vị cho thuê xe máy hàng đầu tại Long Biên, Hà Nội. Uy tín - Chất lượng - Tận tâm.
+                       Đơn vị cho thuê xe máy hàng đầu tại Long Biên, Hà Nội.
                    </p>
-                   <div class="flex space-x-4 pt-2">
-                       <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-brand-600 transition-colors text-white" aria-label="Facebook">
-                           <i class="fab fa-facebook-f"></i>
+                   <div class="flex space-x-3 pt-2">
+                       <a href="#" class="w-8 h-8 rounded-full bg-gray-800 flex items-center justify-center hover:bg-brand-600 transition-colors text-white" aria-label="Facebook">
+                           <i class="fab fa-facebook-f text-sm"></i>
                        </a>
-                       <a href="https://www.google.com/maps/search/?api=1&query=21.0400942,105.8664156" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-red-600 transition-colors text-white" aria-label="Google Maps">
-                           <i class="fas fa-map-marker-alt"></i>
-                       </a>
-                       <a href="https://zalo.me/0989595533" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-blue-400 transition-colors text-white" aria-label="Zalo">
-                           <i class="fas fa-comment"></i>
+                       <a href="https://zalo.me/0989595533" class="w-8 h-8 rounded-full bg-gray-800 flex items-center justify-center hover:bg-blue-400 transition-colors text-white" aria-label="Zalo">
+                           <i class="fas fa-comment text-sm"></i>
                        </a>
                    </div>
                </div>
 
-               <!-- Contact Info -->
+               <!-- Col 2: Về Chúng Tôi -->
                <div>
-                   <h4 class="text-lg font-bold text-white mb-4">Thông Tin Liên Hệ</h4>
-                   <ul class="space-y-4 text-sm">
-                       <li class="flex items-start">
-                           <i class="fas fa-map-marker-alt mt-1 mr-3 text-brand-500"></i>
-                           <span>24 Ngõ 5 Nguyễn Văn Cừ, Ngọc Lâm, Long Biên, Hà Nội</span>
-                       </li>
-                       <li class="flex items-center">
-                           <i class="fas fa-phone-alt mr-3 text-brand-500"></i>
-                           <a href="tel:0989595533" class="hover:text-white transition-colors">0989 595 533</a>
-                       </li>
+                   <h4 class="text-white font-bold mb-4 border-b border-gray-700 pb-2 inline-block">Về Chúng Tôi</h4>
+                   <ul class="space-y-2 text-sm">
+                       <li><a href="https://chothuexemayohanoi.github.io/vanchinh/" class="hover:text-brand-400 transition-colors">Trang Chủ</a></li>
+                       <li><a href="gioithieu.html" class="hover:text-brand-400 transition-colors">Giới Thiệu</a></li>
+                       <li><a href="banggia.html" class="hover:text-brand-400 transition-colors">Bảng Giá 2024</a></li>
+                       <li><a href="danhgia.html" class="hover:text-brand-400 transition-colors">Khách Hàng Đánh Giá</a></li>
+                   </ul>
+               </div>
+
+               <!-- Col 3: Khu Vực & Dịch Vụ -->
+               <div>
+                   <h4 class="text-white font-bold mb-4 border-b border-gray-700 pb-2 inline-block">Khu Vực Thuê Xe</h4>
+                   <ul class="space-y-2 text-sm">
+                       <li><a href="longbien.html" class="hover:text-brand-400 transition-colors">Quận Long Biên</a></li>
+                       <li><a href="gialam.html" class="hover:text-brand-400 transition-colors">Huyện Gia Lâm</a></li>
+                       <li><a href="hoankiem.html" class="hover:text-brand-400 transition-colors">Quận Hoàn Kiếm</a></li>
+                       <li><a href="phoco.html" class="hover:text-brand-400 transition-colors">Khu Vực Phố Cổ</a></li>
+                       <li><a href="xedien.html" class="hover:text-brand-400 transition-colors">Thuê Xe Điện</a></li>
+                   </ul>
+               </div>
+
+               <!-- Col 4: Hình Thức & Chính Sách -->
+               <div>
+                   <h4 class="text-white font-bold mb-4 border-b border-gray-700 pb-2 inline-block">Hỗ Trợ & Chính Sách</h4>
+                   <ul class="space-y-2 text-sm">
+                       <li><a href="thuengay.html" class="hover:text-brand-400 transition-colors">Thuê Theo Ngày</a></li>
+                       <li><a href="thuethang.html" class="hover:text-brand-400 transition-colors">Thuê Theo Tháng</a></li>
+                       <li><a href="thutuc.html" class="hover:text-brand-400 transition-colors">Thủ Tục Thuê Xe</a></li>
+                       <li><a href="dieukhoan.html" class="hover:text-brand-400 transition-colors">Điều Khoản</a></li>
+                       <li><a href="baomat.html" class="hover:text-brand-400 transition-colors">Bảo Mật</a></li>
                    </ul>
                </div>
                
-                <!-- Map Widget -->
-               <div class="lg:col-span-2">
-                    <h4 class="text-lg font-bold text-white mb-4">Định Vị Nhanh</h4>
-                    <div class="rounded-lg overflow-hidden h-32 bg-gray-800 relative group border border-gray-700">
-                        <a href="https://www.google.com/maps/search/?api=1&query=21.0400942,105.8664156" target="_blank" rel="noopener noreferrer" class="block w-full h-full">
-                           <div class="w-full h-full flex items-center justify-center bg-gray-700/50 text-gray-400 group-hover:bg-gray-600/50 transition-colors backdrop-blur-sm">
-                               <span class="text-xs font-semibold"><i class="fas fa-external-link-alt mr-1"></i> Mở Google Maps</span>
-                           </div>
-                       </a>
-                   </div>
+                <!-- Col 5: Liên Hệ -->
+               <div class="col-span-2 md:col-span-1">
+                    <h4 class="text-white font-bold mb-4 border-b border-gray-700 pb-2 inline-block">Liên Hệ</h4>
+                    <ul class="space-y-3 text-sm mb-4">
+                        <li class="flex items-start">
+                           <i class="fas fa-map-marker-alt mt-1 mr-2 text-brand-500 text-xs"></i>
+                           <span>24 Ngõ 5 Nguyễn Văn Cừ, Long Biên</span>
+                        </li>
+                        <li class="flex items-center">
+                           <i class="fas fa-phone-alt mr-2 text-brand-500 text-xs"></i>
+                           <a href="tel:0989595533" class="hover:text-white transition-colors">0989 595 533</a>
+                        </li>
+                    </ul>
+                    <!-- Mini Map Link -->
+                    <a href="https://www.google.com/maps/search/?api=1&query=21.0400942,105.8664156" target="_blank" class="block w-full h-24 bg-gray-800 rounded-lg border border-gray-700 flex items-center justify-center text-gray-500 hover:text-white hover:border-brand-500 transition-all">
+                        <span class="text-xs font-semibold"><i class="fas fa-location-arrow mr-1"></i> Mở Google Maps</span>
+                    </a>
                </div>
            </div>
 
            <div class="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center text-sm text-gray-500">
-               <p>© 2024 Cho thuê xe máy Văn Chính. All rights reserved.</p>
+               <p class="mb-2 md:mb-0">© 2024 Cho thuê xe máy Văn Chính.</p>
+               <div class="flex space-x-4">
+                   <a href="faq.html" class="hover:text-gray-300">Hỏi Đáp</a>
+                   <a href="lienhe.html" class="hover:text-gray-300">Liên Hệ</a>
+               </div>
            </div>
        </div>
    </footer>
