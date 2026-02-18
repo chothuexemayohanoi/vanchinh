@@ -28,7 +28,7 @@
    <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/3.0.6/purify.min.js"></script>
 
    <!-- Google Fonts -->
-   <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+   <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
 
    <style>
        body { font-family: 'Be Vietnam Pro', sans-serif; }
@@ -103,25 +103,34 @@
            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
        }
 
-       /* Floating Widget Animation */
-       .widget-item {
-           transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-           opacity: 0;
-           transform: translateY(20px) scale(0.8);
-           pointer-events: none;
-       }
-       
-       .widget-container:hover .widget-item,
-       .widget-container.active .widget-item {
-           opacity: 1;
-           transform: translateY(0) scale(1);
-           pointer-events: auto;
+       /* --- ULTRA WIDGET ANIMATIONS --- */
+       @keyframes ring-shake {
+           0% { transform: rotate(0) scale(1) skew(1deg); }
+           10% { transform: rotate(-25deg) scale(1.1) skew(-1deg); }
+           20% { transform: rotate(25deg) scale(1.1) skew(1deg); }
+           30% { transform: rotate(-25deg) scale(1.1) skew(-1deg); }
+           40% { transform: rotate(25deg) scale(1.1) skew(1deg); }
+           50% { transform: rotate(0) scale(1) skew(1deg); }
+           100% { transform: rotate(0) scale(1) skew(1deg); }
        }
 
-       /* Delays for staggered animation */
-       .widget-item:nth-child(1) { transition-delay: 0.1s; }
-       .widget-item:nth-child(2) { transition-delay: 0.05s; }
-       .widget-item:nth-child(3) { transition-delay: 0s; }
+       .animate-ring-shake {
+           animation: ring-shake 1.2s cubic-bezier(.36,.07,.19,.97) both;
+       }
+
+       .widget-items-wrapper {
+           transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+           opacity: 0;
+           transform: scale(0) translateY(100%);
+           transform-origin: bottom center;
+           pointer-events: none;
+       }
+
+       .widget-container.active .widget-items-wrapper {
+           opacity: 1;
+           transform: scale(1) translateY(0);
+           pointer-events: auto;
+       }
 
        .sidebar-transition {
            transition: transform 0.4s cubic-bezier(0.32, 0.72, 0, 1);
@@ -162,13 +171,8 @@
            opacity: 0.2;
        }
        
-       /* Dropdown Animation details */
-       details > summary {
-           list-style: none;
-       }
-       details > summary::-webkit-details-marker {
-           display: none;
-       }
+       details > summary { list-style: none; }
+       details > summary::-webkit-details-marker { display: none; }
    </style>
    <script>
        tailwind.config = {
@@ -236,37 +240,51 @@
        </div>
    </header>
 
-   <!-- === Floating Quick Call Widget (Left Side) === -->
-   <div class="fixed left-5 bottom-24 z-50 flex flex-col items-center gap-4 widget-container group">
+   <!-- === MINI APP ULTRA QUICK CALL WIDGET (UPGRADED) === -->
+   <div id="quick-contact-widget" class="fixed left-5 bottom-8 z-[100] flex flex-col items-center gap-4 widget-container group">
        
-       <!-- Expanded Items (Bottom to Top) -->
-       <div class="flex flex-col gap-3 mb-2">
+       <!-- Expanded Items (Popup Menu) -->
+       <div class="widget-items-wrapper flex flex-col gap-4 mb-3 pb-2 items-center">
            <!-- Zalo -->
            <a href="https://zalo.me/0989595533" target="_blank" rel="noopener noreferrer"
-              class="widget-item w-12 h-12 rounded-full bg-blue-500 text-white flex items-center justify-center shadow-lg hover:scale-110 border-2 border-white/30 backdrop-blur-md relative group/tooltip">
-               <span class="font-bold text-xs">Zalo</span>
-               <span class="absolute left-14 px-2 py-1 bg-white/90 text-gray-800 text-xs rounded-md shadow-sm opacity-0 group-hover/tooltip:opacity-100 transition-opacity whitespace-nowrap backdrop-blur-sm">Chat Zalo</span>
-           </a>
-
-           <!-- Call Now -->
-           <a href="tel:0989595533"
-              class="widget-item w-12 h-12 rounded-full bg-green-500 text-white flex items-center justify-center shadow-lg hover:scale-110 border-2 border-white/30 backdrop-blur-md relative group/tooltip">
-               <i class="fas fa-phone-alt animate-tada"></i>
-               <span class="absolute left-14 px-2 py-1 bg-white/90 text-gray-800 text-xs rounded-md shadow-sm opacity-0 group-hover/tooltip:opacity-100 transition-opacity whitespace-nowrap backdrop-blur-sm">Gọi 0989 595 533</span>
+              class="w-14 h-14 rounded-full bg-blue-500 text-white flex items-center justify-center shadow-blue-500/50 shadow-lg hover:scale-110 border-2 border-white/40 backdrop-blur-md relative group/tooltip transition-transform duration-300">
+               <img src="https://upload.wikimedia.org/wikipedia/commons/9/91/Icon_of_Zalo.svg" alt="Zalo" class="w-8 h-8 filter brightness-0 invert">
+               <span class="absolute left-16 px-3 py-1.5 bg-gray-900/90 text-white text-xs font-bold rounded-lg shadow-xl opacity-0 group-hover/tooltip:opacity-100 transition-opacity whitespace-nowrap backdrop-blur-md border border-white/10">Chat Zalo</span>
            </a>
 
            <!-- Map -->
            <a href="https://www.google.com/maps/search/?api=1&query=21.0400942,105.8664156" target="_blank" rel="noopener noreferrer"
-              class="widget-item w-12 h-12 rounded-full bg-red-500 text-white flex items-center justify-center shadow-lg hover:scale-110 border-2 border-white/30 backdrop-blur-md relative group/tooltip">
-               <i class="fas fa-map-marked-alt"></i>
-               <span class="absolute left-14 px-2 py-1 bg-white/90 text-gray-800 text-xs rounded-md shadow-sm opacity-0 group-hover/tooltip:opacity-100 transition-opacity whitespace-nowrap backdrop-blur-sm">Xem Bản Đồ</span>
+              class="w-14 h-14 rounded-full bg-red-500 text-white flex items-center justify-center shadow-red-500/50 shadow-lg hover:scale-110 border-2 border-white/40 backdrop-blur-md relative group/tooltip transition-transform duration-300">
+               <i class="fas fa-map-marked-alt text-xl"></i>
+               <span class="absolute left-16 px-3 py-1.5 bg-gray-900/90 text-white text-xs font-bold rounded-lg shadow-xl opacity-0 group-hover/tooltip:opacity-100 transition-opacity whitespace-nowrap backdrop-blur-md border border-white/10">Chỉ Đường</span>
+           </a>
+
+           <!-- Direct Call -->
+           <a href="tel:0989595533"
+              class="w-14 h-14 rounded-full bg-green-500 text-white flex items-center justify-center shadow-green-500/50 shadow-lg hover:scale-110 border-2 border-white/40 backdrop-blur-md relative group/tooltip transition-transform duration-300">
+               <i class="fas fa-phone text-xl"></i>
+               <span class="absolute left-16 px-3 py-1.5 bg-gray-900/90 text-white text-xs font-bold rounded-lg shadow-xl opacity-0 group-hover/tooltip:opacity-100 transition-opacity whitespace-nowrap backdrop-blur-md border border-white/10">Gọi Luôn</span>
            </a>
        </div>
 
-       <!-- Main Trigger Button -->
-       <button class="w-14 h-14 rounded-full bg-brand-600 text-white shadow-brand-500/50 shadow-xl flex items-center justify-center text-2xl hover:bg-brand-700 transition-transform hover:scale-105 border-4 border-white/20 backdrop-blur-sm">
-           <i class="fas fa-headset"></i>
+       <!-- Main Trigger Button (Ultra Design) -->
+       <button id="main-contact-btn" class="relative w-16 h-16 rounded-full bg-gradient-to-br from-brand-500 to-indigo-600 text-white shadow-brand-500/60 shadow-2xl flex items-center justify-center text-2xl transition-all duration-300 hover:scale-105 border-[3px] border-white/30 backdrop-blur-sm z-20 overflow-visible">
+           
+           <!-- "Nháy" Effect (Ripple) -->
+           <span class="absolute inset-0 rounded-full bg-brand-400 opacity-75 animate-ping pointer-events-none"></span>
+           <span class="absolute -inset-1 rounded-full bg-brand-400/30 animate-pulse pointer-events-none"></span>
+           
+           <!-- Icon with Toggle State logic handled in JS -->
+           <i class="fas fa-phone-volume text-3xl drop-shadow-md transition-transform duration-300" id="contact-icon"></i>
+           
+           <!-- Notification Badge -->
+           <span class="absolute -top-1 -right-1 flex h-6 w-6">
+             <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+             <span class="relative inline-flex rounded-full h-6 w-6 bg-red-500 text-[10px] text-white font-bold items-center justify-center border-2 border-white">1</span>
+           </span>
        </button>
+       
+       <span class="text-[10px] font-bold text-brand-600 dark:text-brand-400 bg-white/80 dark:bg-gray-800/80 px-2 py-0.5 rounded-full shadow-sm backdrop-blur-sm mt-1 animate-bounce">Hỗ trợ 24/7</span>
    </div>
 
    <!-- === Sidebar / Apple Style Ultra === -->
@@ -379,23 +397,18 @@
                        </div>
                        <span class="font-medium text-[15px] flex-1">Hỏi Đáp</span>
                    </a>
-                   
-                   <!-- ADDED LINK 1: BẢO MẬT -->
                    <a href="baomat.html" class="ios-item flex items-center px-4 py-3.5 text-gray-800 dark:text-white">
                        <div class="w-8 h-8 rounded-lg bg-rose-500 flex items-center justify-center text-white mr-3 shadow-sm">
                            <i class="fas fa-shield-alt text-sm"></i>
                        </div>
                        <span class="font-medium text-[15px] flex-1">Bảo Mật</span>
                    </a>
-
-                   <!-- ADDED LINK 2: CHÍNH SÁCH -->
                    <a href="chinhsach.html" class="ios-item flex items-center px-4 py-3.5 text-gray-800 dark:text-white">
                        <div class="w-8 h-8 rounded-lg bg-cyan-500 flex items-center justify-center text-white mr-3 shadow-sm">
                            <i class="fas fa-file-contract text-sm"></i>
                        </div>
                        <span class="font-medium text-[15px] flex-1">Chính Sách</span>
                    </a>
-
                    <a href="lienhe.html" class="ios-item flex items-center px-4 py-3.5 text-gray-800 dark:text-white">
                        <div class="w-8 h-8 rounded-lg bg-indigo-500 flex items-center justify-center text-white mr-3 shadow-sm">
                            <i class="fas fa-envelope text-sm"></i>
@@ -424,7 +437,7 @@
                    <span class="inline-block px-4 py-1.5 rounded-full bg-white/40 border border-white/40 text-brand-700 text-sm font-semibold tracking-wide backdrop-blur-sm shadow-sm dark:bg-white/10 dark:text-brand-300">
                        <i class="fas fa-check-circle mr-1"></i> Uy Tín Số 1 Long Biên
                    </span>
-                   <!-- Optimized H1 for SEO - REMOVED "Liên hệ" as requested -->
+                   <!-- Optimized H1 for SEO -->
                    <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold leading-tight text-gray-900 dark:text-white drop-shadow-sm">
                        <span class="gradient-text">Cho Thuê Xe Máy Long Biên</span> - Văn Chính
                    </h1>
@@ -498,7 +511,7 @@
            </div>
        </section>
 
-       <!-- === Main Content for SEO === -->
+       <!-- === Main Content === -->
        <article class="container mx-auto px-4 py-16 space-y-16 max-w-4xl relative z-10">
            
            <!-- Section 1 -->
@@ -674,13 +687,13 @@
        </article>
    </main>
 
-   <!-- === Footer (Full Menu Integration) === -->
+   <!-- === Footer === -->
    <footer class="bg-gray-900/95 text-gray-300 pt-16 pb-8 border-t border-gray-800 backdrop-blur-lg relative z-10">
        <div class="container mx-auto px-4">
-           <!-- Footer Grid System: 2 cols Mobile, 3 cols Tablet, 5 cols Desktop -->
+           <!-- Footer Grid System -->
            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 mb-12">
                
-               <!-- Col 1: Brand Info (Full width on Mobile small, but here kept as col to save space or adjust) -->
+               <!-- Col 1: Brand Info -->
                <div class="col-span-2 md:col-span-1 lg:col-span-1 space-y-4">
                    <h3 class="text-2xl font-bold text-white mb-2">Văn Chính<span class="text-brand-500">.</span></h3>
                    <p class="text-sm leading-relaxed text-gray-400">
@@ -699,7 +712,6 @@
                <!-- Col 2: Về Chúng Tôi -->
                <div>
                    <h4 class="text-white font-bold mb-4 border-b border-gray-700 pb-2 inline-block">Về Chúng Tôi</h4>
-                   <!-- SHORTENED LINKS -->
                    <ul class="space-y-2 text-sm">
                        <li><a href="https://chothuexemayohanoi.github.io/vanchinh/" class="hover:text-brand-400 transition-colors">Trang Chủ</a></li>
                        <li><a href="gioithieu.html" class="hover:text-brand-400 transition-colors">Giới Thiệu</a></li>
@@ -708,10 +720,9 @@
                    </ul>
                </div>
 
-               <!-- Col 3: Khu Vực & Dịch Vụ -->
+               <!-- Col 3: Khu Vực -->
                <div>
                    <h4 class="text-white font-bold mb-4 border-b border-gray-700 pb-2 inline-block">Khu Vực</h4>
-                   <!-- SHORTENED LINKS -->
                    <ul class="space-y-2 text-sm">
                        <li><a href="longbien.html" class="hover:text-brand-400 transition-colors">Long Biên</a></li>
                        <li><a href="gialam.html" class="hover:text-brand-400 transition-colors">Gia Lâm</a></li>
@@ -721,16 +732,14 @@
                    </ul>
                </div>
 
-               <!-- Col 4: Hình Thức & Chính Sách -->
+               <!-- Col 4: Hỗ Trợ -->
                <div>
                    <h4 class="text-white font-bold mb-4 border-b border-gray-700 pb-2 inline-block">Hỗ Trợ</h4>
-                   <!-- SHORTENED LINKS -->
                    <ul class="space-y-2 text-sm">
                        <li><a href="thuengay.html" class="hover:text-brand-400 transition-colors">Theo Ngày</a></li>
                        <li><a href="thuethang.html" class="hover:text-brand-400 transition-colors">Theo Tháng</a></li>
                        <li><a href="thutuc.html" class="hover:text-brand-400 transition-colors">Thủ Tục</a></li>
                        <li><a href="dieukhoan.html" class="hover:text-brand-400 transition-colors">Điều Khoản</a></li>
-                       <!-- Added Links Here -->
                        <li><a href="baomat.html" class="hover:text-brand-400 transition-colors">Bảo Mật</a></li>
                        <li><a href="chinhsach.html" class="hover:text-brand-400 transition-colors">Chính Sách</a></li>
                    </ul>
@@ -749,7 +758,6 @@
                            <a href="tel:0989595533" class="hover:text-white transition-colors">0989 595 533</a>
                         </li>
                     </ul>
-                    <!-- REMOVED MINI MAP LINK HERE AS REQUESTED -->
                </div>
            </div>
 
@@ -871,13 +879,83 @@
            totalPriceEl.textContent = new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(total);
        }
        
-       // Widget Mobile Toggle Hack
-       const widgetContainer = document.querySelector('.widget-container');
-       widgetContainer.addEventListener('click', function() {
-           this.classList.toggle('active');
+       calculateTotal();
+
+       // --- 5. ULTRA QUICK CALL WIDGET LOGIC ---
+       const widgetContainer = document.getElementById('quick-contact-widget');
+       const mainContactBtn = document.getElementById('main-contact-btn');
+       const contactIcon = document.getElementById('contact-icon');
+       
+       // Toggle Menu
+       mainContactBtn.addEventListener('click', (e) => {
+           e.stopPropagation();
+           
+           // Haptic Feedback (Rung thật trên Mobile)
+           if (navigator.vibrate) {
+               navigator.vibrate(50); 
+           }
+
+           const isActive = widgetContainer.classList.contains('active');
+           
+           if (isActive) {
+               widgetContainer.classList.remove('active');
+               contactIcon.classList.remove('fa-times', 'rotate-90');
+               contactIcon.classList.add('fa-phone-volume');
+               // Resume shaking interval
+               startShakeInterval();
+           } else {
+               widgetContainer.classList.add('active');
+               contactIcon.classList.remove('fa-phone-volume');
+               contactIcon.classList.add('fa-times', 'rotate-90');
+               // Stop shaking when open
+               stopShakeInterval();
+           }
        });
 
-       calculateTotal();
+       // Auto Shake (Giả lập rung điện thoại) logic
+       let shakeInterval;
+
+       function triggerShake() {
+           // Visual Shake
+           mainContactBtn.classList.add('animate-ring-shake');
+           
+           // Haptic vibration (very short)
+           if (navigator.vibrate) {
+               navigator.vibrate([10, 30, 10]);
+           }
+
+           // Remove class after animation finishes
+           setTimeout(() => {
+               mainContactBtn.classList.remove('animate-ring-shake');
+           }, 1200);
+       }
+
+       function startShakeInterval() {
+           // Shake every 5 seconds to grab attention
+           shakeInterval = setInterval(triggerShake, 5000);
+       }
+
+       function stopShakeInterval() {
+           clearInterval(shakeInterval);
+           mainContactBtn.classList.remove('animate-ring-shake');
+       }
+
+       // Start shaking on load after 2 seconds
+       setTimeout(() => {
+           startShakeInterval();
+           // Initial trigger
+           triggerShake(); 
+       }, 2000);
+
+       // Close widget when clicking outside
+       document.addEventListener('click', (e) => {
+           if (!widgetContainer.contains(e.target) && widgetContainer.classList.contains('active')) {
+               widgetContainer.classList.remove('active');
+               contactIcon.classList.remove('fa-times', 'rotate-90');
+               contactIcon.classList.add('fa-phone-volume');
+               startShakeInterval();
+           }
+       });
 
    </script>
 </body>
