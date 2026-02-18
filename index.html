@@ -29,6 +29,9 @@
 
    <!-- Google Fonts -->
    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
+   
+   <!-- Markdown Parser for AI Response -->
+   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 
    <style>
        body { font-family: 'Be Vietnam Pro', sans-serif; }
@@ -149,6 +152,18 @@
            background-image: linear-gradient(to right, #2563eb, #9333ea);
        }
 
+       /* AI Loading Animation */
+       .typing-dot {
+           animation: typing 1.4s infinite ease-in-out both;
+       }
+       .typing-dot:nth-child(1) { animation-delay: -0.32s; }
+       .typing-dot:nth-child(2) { animation-delay: -0.16s; }
+       
+       @keyframes typing {
+           0%, 80%, 100% { transform: scale(0); }
+           40% { transform: scale(1); }
+       }
+
        /* Ambient Background */
        .ambient-bg {
            position: fixed;
@@ -173,6 +188,14 @@
        
        details > summary { list-style: none; }
        details > summary::-webkit-details-marker { display: none; }
+
+       /* Prose for AI Content */
+       .prose-custom h3 { font-size: 1.1em; font-weight: bold; margin-top: 1em; margin-bottom: 0.5em; color: #2563eb; }
+       .dark .prose-custom h3 { color: #60a5fa; }
+       .prose-custom ul { list-style-type: disc; padding-left: 1.5em; margin-bottom: 1em; }
+       .prose-custom li { margin-bottom: 0.25em; }
+       .prose-custom strong { font-weight: 600; color: #1f2937; }
+       .dark .prose-custom strong { color: #e5e7eb; }
    </style>
    <script>
        tailwind.config = {
@@ -449,8 +472,9 @@
                        <a href="tel:0989595533" class="inline-flex items-center justify-center px-8 py-3.5 text-base font-bold text-white transition-all duration-200 bg-brand-600/90 border border-transparent rounded-full shadow-lg hover:bg-brand-700 backdrop-blur-sm hover:shadow-brand-500/50 hover:-translate-y-1">
                            <i class="fas fa-phone-alt mr-2 animate-pulse"></i> 0989 595 533
                        </a>
-                       <a href="#location" class="glass-panel inline-flex items-center justify-center px-8 py-3.5 text-base font-bold text-gray-700 transition-all duration-200 rounded-full shadow-md hover:bg-white/60 dark:text-gray-200 dark:hover:bg-gray-700/60">
-                           <i class="fas fa-map-marker-alt mr-2 text-red-500"></i> Xem Vị Trí
+                       <!-- AI Trigger Button -->
+                       <a href="#ai-features" class="inline-flex items-center justify-center px-8 py-3.5 text-base font-bold text-gray-800 transition-all duration-200 bg-white/80 border border-white/40 rounded-full shadow-md hover:bg-white backdrop-blur-sm hover:shadow-lg dark:bg-gray-800/80 dark:text-white dark:hover:bg-gray-700">
+                           <span class="mr-2">✨</span> Trợ Lý AI
                        </a>
                    </div>
                </div>
@@ -514,6 +538,113 @@
        <!-- === Main Content === -->
        <article class="container mx-auto px-4 py-16 space-y-16 max-w-4xl relative z-10">
            
+           <!-- === NEW MULTI-FEATURE AI SECTION === -->
+           <section id="ai-features" class="space-y-6 scroll-mt-24">
+               <div class="flex items-center gap-3">
+                   <span class="text-3xl">🤖</span>
+                   <h2 class="text-3xl font-bold text-gray-900 dark:text-white border-l-4 border-indigo-500 pl-4">Trung Tâm Trợ Lý AI Văn Chính</h2>
+               </div>
+               
+               <!-- AI FEATURES GRID (2x2) -->
+               <div class="grid md:grid-cols-2 gap-6">
+                   
+                   <!-- Feature 1: Trip Planner -->
+                   <div class="glass-panel p-6 rounded-2xl relative overflow-hidden flex flex-col h-full border-t-4 border-purple-500 hover:shadow-xl transition-shadow">
+                       <h3 class="text-xl font-bold text-gray-800 dark:text-white mb-2 flex items-center gap-2">
+                           <span class="text-2xl">✨</span> Lên Lịch Trình Vi Vu
+                       </h3>
+                       <p class="text-sm text-gray-600 dark:text-gray-300 mb-4 flex-1">
+                           Bạn chưa biết đi đâu chơi? AI sẽ gợi ý lịch trình phượt xe máy cực chất.
+                       </p>
+                       <form onsubmit="handleAIPlan(event)" class="space-y-4">
+                           <select id="ai-days" class="w-full p-2.5 rounded-lg bg-white/50 dark:bg-gray-800/50 border border-gray-200 dark:border-gray-700 outline-none text-sm focus:ring-2 focus:ring-purple-500">
+                               <option value="1 ngày">1 Ngày (City Tour)</option>
+                               <option value="2 ngày 1 đêm">2 Ngày 1 Đêm (Ngoại thành)</option>
+                               <option value="buổi tối">Một buổi tối lượn phố</option>
+                           </select>
+                           <button type="submit" id="btn-generate-plan" class="w-full py-2.5 bg-purple-600 hover:bg-purple-700 text-white font-bold rounded-lg shadow-md transition-colors text-sm">
+                               Tạo Lịch Trình
+                           </button>
+                       </form>
+                       <div id="ai-result-plan" class="hidden mt-4 pt-4 border-t border-gray-200/50">
+                           <div id="ai-content-plan" class="prose-custom text-xs leading-relaxed max-h-[150px] overflow-y-auto pr-2 custom-scrollbar text-gray-700 dark:text-gray-300"></div>
+                       </div>
+                       <div id="ai-loading-plan" class="hidden mt-4 text-center"><div class="text-purple-500 text-xs animate-pulse font-medium">Đang lên kế hoạch...</div></div>
+                   </div>
+
+                   <!-- Feature 2: Foodie Hunter -->
+                   <div class="glass-panel p-6 rounded-2xl relative overflow-hidden flex flex-col h-full border-t-4 border-orange-500 hover:shadow-xl transition-shadow">
+                       <h3 class="text-xl font-bold text-gray-800 dark:text-white mb-2 flex items-center gap-2">
+                           <span class="text-2xl">🍜</span> Thổ Địa Ăn Uống
+                       </h3>
+                       <p class="text-sm text-gray-600 dark:text-gray-300 mb-4 flex-1">
+                           Tìm quán ngon chuẩn vị địa phương. Bạn đang ở đâu và thèm gì?
+                       </p>
+                       <form onsubmit="handleAIFood(event)" class="space-y-4">
+                           <div class="grid grid-cols-2 gap-2">
+                               <input type="text" id="food-location" placeholder="Vị trí (VD: Phố Cổ)" class="w-full p-2.5 rounded-lg bg-white/50 dark:bg-gray-800/50 border border-gray-200 dark:border-gray-700 outline-none text-sm focus:ring-2 focus:ring-orange-500">
+                               <input type="text" id="food-craving" placeholder="Món thèm (VD: Phở)" class="w-full p-2.5 rounded-lg bg-white/50 dark:bg-gray-800/50 border border-gray-200 dark:border-gray-700 outline-none text-sm focus:ring-2 focus:ring-orange-500">
+                           </div>
+                           <button type="submit" id="btn-generate-food" class="w-full py-2.5 bg-orange-500 hover:bg-orange-600 text-white font-bold rounded-lg shadow-md transition-colors text-sm">
+                               Tìm Quán Ngon
+                           </button>
+                       </form>
+                       <div id="ai-result-food" class="hidden mt-4 pt-4 border-t border-gray-200/50">
+                           <div id="ai-content-food" class="prose-custom text-xs leading-relaxed max-h-[150px] overflow-y-auto pr-2 custom-scrollbar text-gray-700 dark:text-gray-300"></div>
+                       </div>
+                       <div id="ai-loading-food" class="hidden mt-4 text-center"><div class="text-orange-500 text-xs animate-pulse font-medium">Đang lùng sục quán ngon...</div></div>
+                   </div>
+
+                   <!-- Feature 3: Mechanic AI (NEW) -->
+                   <div class="glass-panel p-6 rounded-2xl relative overflow-hidden flex flex-col h-full border-t-4 border-blue-500 hover:shadow-xl transition-shadow bg-blue-50/20 dark:bg-blue-900/10">
+                       <h3 class="text-xl font-bold text-gray-800 dark:text-white mb-2 flex items-center gap-2">
+                           <span class="text-2xl">🔧</span> Bác Sĩ Xe Máy
+                       </h3>
+                       <p class="text-sm text-gray-600 dark:text-gray-300 mb-4 flex-1">
+                           Xe có tiếng kêu lạ? Nhập hiện tượng để chẩn đoán nhanh và nhận lời khuyên.
+                       </p>
+                       <form onsubmit="handleAIMechanic(event)" class="space-y-4">
+                           <input type="text" id="mech-input" placeholder="Mô tả (VD: Phanh kêu két két, khó đề...)" class="w-full p-2.5 rounded-lg bg-white/80 dark:bg-gray-800/80 border border-blue-200 dark:border-blue-800 outline-none text-sm focus:ring-2 focus:ring-blue-500">
+                           <button type="submit" id="btn-generate-mech" class="w-full py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-lg shadow-md transition-colors text-sm">
+                               Chẩn Đoán Ngay
+                           </button>
+                       </form>
+                       <div id="ai-result-mech" class="hidden mt-4 pt-4 border-t border-gray-200/50">
+                           <div id="ai-content-mech" class="prose-custom text-xs leading-relaxed max-h-[150px] overflow-y-auto pr-2 custom-scrollbar text-gray-700 dark:text-gray-300"></div>
+                       </div>
+                       <div id="ai-loading-mech" class="hidden mt-4 text-center"><div class="text-blue-500 text-xs animate-pulse font-medium">Đang kiểm tra động cơ...</div></div>
+                   </div>
+
+                   <!-- Feature 4: SOS Support -->
+                   <div class="glass-panel p-6 rounded-2xl relative overflow-hidden flex flex-col h-full border-t-4 border-red-500 hover:shadow-xl transition-shadow bg-red-50/20 dark:bg-red-900/10">
+                       <h3 class="text-xl font-bold text-gray-800 dark:text-white mb-2 flex items-center gap-2">
+                           <span class="text-2xl">🆘</span> Trợ Lý SOS
+                       </h3>
+                       <p class="text-sm text-gray-600 dark:text-gray-300 mb-4 flex-1">
+                           Dịch vấn đề sang tiếng Việt để nhờ người dân giúp đỡ và nhận lời khuyên.
+                       </p>
+                       <form onsubmit="handleAISupport(event)" class="space-y-4">
+                           <input type="text" id="sos-input" placeholder="Nhập vấn đề (VD: Flat tire...)" class="w-full p-2.5 rounded-lg bg-white/80 dark:bg-gray-800/80 border border-red-200 dark:border-red-800 outline-none text-sm focus:ring-2 focus:ring-red-500">
+                           <button type="submit" id="btn-generate-sos" class="w-full py-2.5 bg-red-600 hover:bg-red-700 text-white font-bold rounded-lg shadow-md transition-colors text-sm">
+                               Dịch & Hỗ Trợ
+                           </button>
+                       </form>
+                       <!-- Result Box for SOS -->
+                       <div id="ai-result-sos" class="hidden mt-4 pt-4 border-t border-gray-200/50 space-y-3">
+                           <div class="bg-white dark:bg-gray-800 p-3 rounded-lg border-2 border-red-500 text-center shadow-inner">
+                               <div class="text-[10px] text-gray-500 uppercase font-bold mb-1">Đưa điện thoại cho người dân:</div>
+                               <div id="sos-vietnamese" class="text-lg font-black text-gray-900 dark:text-white leading-tight"></div>
+                           </div>
+                           <div class="bg-blue-50 dark:bg-gray-700/50 p-2 rounded-lg text-xs text-gray-700 dark:text-gray-200 italic">
+                               <i class="fas fa-info-circle text-blue-500 mr-1"></i> <span id="sos-advice"></span>
+                           </div>
+                       </div>
+                       <div id="ai-loading-sos" class="hidden mt-4 text-center"><div class="text-red-500 text-xs animate-pulse font-medium">Đang kết nối...</div></div>
+                   </div>
+
+               </div>
+           </section>
+
            <!-- Section 1 -->
            <section id="about" class="space-y-6">
                <h2 class="text-3xl font-bold text-gray-900 dark:text-white border-l-4 border-brand-500 pl-4">Dịch Vụ Cho Thuê Xe Máy Hà Nội - Tại Sao Chọn Văn Chính?</h2>
@@ -886,11 +1017,9 @@
        const mainContactBtn = document.getElementById('main-contact-btn');
        const contactIcon = document.getElementById('contact-icon');
        
-       // Toggle Menu
        mainContactBtn.addEventListener('click', (e) => {
            e.stopPropagation();
            
-           // Haptic Feedback (Rung thật trên Mobile)
            if (navigator.vibrate) {
                navigator.vibrate(50); 
            }
@@ -901,53 +1030,24 @@
                widgetContainer.classList.remove('active');
                contactIcon.classList.remove('fa-times', 'rotate-90');
                contactIcon.classList.add('fa-phone-volume');
-               // Resume shaking interval
                startShakeInterval();
            } else {
                widgetContainer.classList.add('active');
                contactIcon.classList.remove('fa-phone-volume');
                contactIcon.classList.add('fa-times', 'rotate-90');
-               // Stop shaking when open
                stopShakeInterval();
            }
        });
 
-       // Auto Shake (Giả lập rung điện thoại) logic
        let shakeInterval;
-
        function triggerShake() {
-           // Visual Shake
            mainContactBtn.classList.add('animate-ring-shake');
-           
-           // Haptic vibration (very short)
-           if (navigator.vibrate) {
-               navigator.vibrate([10, 30, 10]);
-           }
-
-           // Remove class after animation finishes
-           setTimeout(() => {
-               mainContactBtn.classList.remove('animate-ring-shake');
-           }, 1200);
+           if (navigator.vibrate) navigator.vibrate([10, 30, 10]);
+           setTimeout(() => { mainContactBtn.classList.remove('animate-ring-shake'); }, 1200);
        }
-
-       function startShakeInterval() {
-           // Shake every 5 seconds to grab attention
-           shakeInterval = setInterval(triggerShake, 5000);
-       }
-
-       function stopShakeInterval() {
-           clearInterval(shakeInterval);
-           mainContactBtn.classList.remove('animate-ring-shake');
-       }
-
-       // Start shaking on load after 2 seconds
-       setTimeout(() => {
-           startShakeInterval();
-           // Initial trigger
-           triggerShake(); 
-       }, 2000);
-
-       // Close widget when clicking outside
+       function startShakeInterval() { shakeInterval = setInterval(triggerShake, 5000); }
+       function stopShakeInterval() { clearInterval(shakeInterval); mainContactBtn.classList.remove('animate-ring-shake'); }
+       setTimeout(() => { startShakeInterval(); triggerShake(); }, 2000);
        document.addEventListener('click', (e) => {
            if (!widgetContainer.contains(e.target) && widgetContainer.classList.contains('active')) {
                widgetContainer.classList.remove('active');
@@ -956,6 +1056,160 @@
                startShakeInterval();
            }
        });
+
+
+       // --- 6. UNIFIED GEMINI AI LOGIC ---
+       const apiKey = ""; // SYSTEM INJECTED KEY
+       
+       // Helper to Call API
+       async function callGemini(prompt, signal) {
+            const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
+            
+            // Retry logic
+            const fetchWithRetry = async (retries = 3, delay = 1000) => {
+               try {
+                   const response = await fetch(url, {
+                       method: 'POST',
+                       headers: { 'Content-Type': 'application/json' },
+                       body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] }),
+                       signal: signal
+                   });
+                   if (!response.ok) {
+                        if (response.status === 429 && retries > 0) {
+                            await new Promise(resolve => setTimeout(resolve, delay));
+                            return fetchWithRetry(retries - 1, delay * 2);
+                        }
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                   }
+                   return response.json();
+               } catch (error) {
+                   if (retries > 0 && error.name !== 'AbortError') {
+                       await new Promise(resolve => setTimeout(resolve, delay));
+                       return fetchWithRetry(retries - 1, delay * 2);
+                   }
+                   throw error;
+               }
+            };
+
+            return fetchWithRetry();
+       }
+
+       // Feature 1: Trip Planner
+       async function handleAIPlan(event) {
+           event.preventDefault();
+           const btn = document.getElementById('btn-generate-plan');
+           const result = document.getElementById('ai-result-plan');
+           const content = document.getElementById('ai-content-plan');
+           const loading = document.getElementById('ai-loading-plan');
+           
+           const days = document.getElementById('ai-days').value;
+           
+           btn.disabled = true; btn.innerText = "⏳ Đang tính...";
+           result.classList.add('hidden'); loading.classList.remove('hidden');
+
+           const prompt = `Bạn là hướng dẫn viên Hà Nội. Viết lịch trình phượt xe máy ${days} khởi hành từ Long Biên. Nêu rõ điểm ăn chơi ngon bổ rẻ. Ngắn gọn, dùng bullet points.`;
+           
+           try {
+               const data = await callGemini(prompt);
+               content.innerHTML = DOMPurify.sanitize(marked.parse(data.candidates[0].content.parts[0].text));
+               result.classList.remove('hidden');
+           } catch (e) { alert("Lỗi kết nối AI. Thử lại sau!"); console.error(e); }
+           finally { loading.classList.add('hidden'); btn.disabled = false; btn.innerText = "Tạo Lịch Trình"; }
+       }
+
+       // Feature 2: Foodie Hunter
+       async function handleAIFood(event) {
+           event.preventDefault();
+           const btn = document.getElementById('btn-generate-food');
+           const result = document.getElementById('ai-result-food');
+           const content = document.getElementById('ai-content-food');
+           const loading = document.getElementById('ai-loading-food');
+           
+           const loc = document.getElementById('food-location').value || "Hà Nội";
+           const crave = document.getElementById('food-craving').value || "Món ngon";
+           
+           btn.disabled = true; btn.innerText = "⏳ Đang tìm...";
+           result.classList.add('hidden'); loading.classList.remove('hidden');
+
+           const prompt = `Bạn là thổ địa ăn uống Hà Nội. Tôi đang ở "${loc}" và thèm "${crave}". Hãy gợi ý 3 quán vỉa hè/bình dân ngon nhất gần đó.
+           Format:
+           1. **Tên quán** - Địa chỉ (Giá khoảng ...)
+           - Tại sao ngon: ...
+           Dùng icon món ăn. Ngắn gọn.`;
+           
+           try {
+               const data = await callGemini(prompt);
+               content.innerHTML = DOMPurify.sanitize(marked.parse(data.candidates[0].content.parts[0].text));
+               result.classList.remove('hidden');
+           } catch (e) { alert("Lỗi kết nối AI. Thử lại sau!"); }
+           finally { loading.classList.add('hidden'); btn.disabled = false; btn.innerText = "Tìm Quán Ngon"; }
+       }
+
+       // Feature 3: Mechanic Check (NEW)
+       async function handleAIMechanic(event) {
+           event.preventDefault();
+           const btn = document.getElementById('btn-generate-mech');
+           const result = document.getElementById('ai-result-mech');
+           const content = document.getElementById('ai-content-mech');
+           const loading = document.getElementById('ai-loading-mech');
+           
+           const symptom = document.getElementById('mech-input').value;
+           if(!symptom) return;
+           
+           btn.disabled = true; btn.innerText = "⏳ Đang kiểm tra...";
+           result.classList.add('hidden'); loading.classList.remove('hidden');
+
+           const prompt = `Bạn là thợ sửa xe máy chuyên nghiệp. Khách hàng mô tả: "${symptom}". 
+           Hãy chẩn đoán nhanh: 
+           1. Nguyên nhân có thể (ngắn gọn). 
+           2. Mức độ nguy hiểm (An toàn/Cần kiểm tra/Dừng ngay).
+           3. Lời khuyên xử lý tạm thời.
+           Dùng icon cảnh báo nếu cần.`;
+           
+           try {
+               const data = await callGemini(prompt);
+               content.innerHTML = DOMPurify.sanitize(marked.parse(data.candidates[0].content.parts[0].text));
+               result.classList.remove('hidden');
+           } catch (e) { alert("Lỗi kết nối AI. Thử lại sau!"); }
+           finally { loading.classList.add('hidden'); btn.disabled = false; btn.innerText = "Chẩn Đoán Ngay"; }
+       }
+
+       // Feature 4: SOS Support
+       async function handleAISupport(event) {
+           event.preventDefault();
+           const btn = document.getElementById('btn-generate-sos');
+           const result = document.getElementById('ai-result-sos');
+           const txtVN = document.getElementById('sos-vietnamese');
+           const txtAdvice = document.getElementById('sos-advice');
+           const loading = document.getElementById('ai-loading-sos');
+           
+           const input = document.getElementById('sos-input').value;
+           if (!input) return;
+
+           btn.disabled = true; btn.innerHTML = "⏳ Đang dịch...";
+           result.classList.add('hidden'); loading.classList.remove('hidden');
+
+           // Prompt to return JSON for easy parsing
+           const prompt = `Translate this issue: "${input}" to natural, polite Vietnamese for a foreigner to show a local mechanic/person. 
+           Then give 1 short safety advice in English (or the language of the input) for this situation in Hanoi.
+           Output JSON format: { "vietnamese": "...", "advice": "..." }`;
+           
+           try {
+               const data = await callGemini(prompt);
+               const text = data.candidates[0].content.parts[0].text;
+               // Simple cleaner for JSON in case MD code blocks are used
+               const jsonStr = text.replace(/```json|```/g, '').trim();
+               const parsed = JSON.parse(jsonStr);
+
+               txtVN.textContent = parsed.vietnamese;
+               txtAdvice.textContent = parsed.advice;
+               result.classList.remove('hidden');
+           } catch (e) { 
+               console.error(e);
+               alert("Không thể dịch lúc này. Vui lòng thử lại.");
+           }
+           finally { loading.classList.add('hidden'); btn.disabled = false; btn.innerHTML = `<i class="fas fa-language mr-1"></i> Dịch & Hỗ Trợ`; }
+       }
 
    </script>
 </body>
