@@ -542,7 +542,7 @@
            <section id="ai-features" class="space-y-6 scroll-mt-24">
                <div class="flex items-center gap-3">
                    <span class="text-3xl">🤖</span>
-                   <h2 class="text-3xl font-bold text-gray-900 dark:text-white border-l-4 border-indigo-500 pl-4">Trung Tâm Trợ Lý AI Văn Chính</h2>
+                   <h2 class="text-3xl font-bold text-gray-900 dark:text-white border-l-4 border-indigo-500 pl-4">Trung Tâm Trợ Lý AI Văn Chính (Mô Phỏng)</h2>
                </div>
                
                <!-- AI FEATURES GRID (2x2) -->
@@ -569,7 +569,7 @@
                        <div id="ai-result-plan" class="hidden mt-4 pt-4 border-t border-gray-200/50">
                            <div id="ai-content-plan" class="prose-custom text-xs leading-relaxed max-h-[150px] overflow-y-auto pr-2 custom-scrollbar text-gray-700 dark:text-gray-300"></div>
                        </div>
-                       <div id="ai-loading-plan" class="hidden mt-4 text-center"><div class="text-purple-500 text-xs animate-pulse font-medium">Đang lên kế hoạch...</div></div>
+                       <div id="ai-loading-plan" class="hidden mt-4 text-center"><div class="text-purple-500 text-xs animate-pulse font-medium">AI đang lên kế hoạch...</div></div>
                    </div>
 
                    <!-- Feature 2: Foodie Hunter -->
@@ -592,7 +592,7 @@
                        <div id="ai-result-food" class="hidden mt-4 pt-4 border-t border-gray-200/50">
                            <div id="ai-content-food" class="prose-custom text-xs leading-relaxed max-h-[150px] overflow-y-auto pr-2 custom-scrollbar text-gray-700 dark:text-gray-300"></div>
                        </div>
-                       <div id="ai-loading-food" class="hidden mt-4 text-center"><div class="text-orange-500 text-xs animate-pulse font-medium">Đang lùng sục quán ngon...</div></div>
+                       <div id="ai-loading-food" class="hidden mt-4 text-center"><div class="text-orange-500 text-xs animate-pulse font-medium">AI đang lùng sục quán ngon...</div></div>
                    </div>
 
                    <!-- Feature 3: Mechanic AI (NEW) -->
@@ -612,7 +612,7 @@
                        <div id="ai-result-mech" class="hidden mt-4 pt-4 border-t border-gray-200/50">
                            <div id="ai-content-mech" class="prose-custom text-xs leading-relaxed max-h-[150px] overflow-y-auto pr-2 custom-scrollbar text-gray-700 dark:text-gray-300"></div>
                        </div>
-                       <div id="ai-loading-mech" class="hidden mt-4 text-center"><div class="text-blue-500 text-xs animate-pulse font-medium">Đang kiểm tra động cơ...</div></div>
+                       <div id="ai-loading-mech" class="hidden mt-4 text-center"><div class="text-blue-500 text-xs animate-pulse font-medium">AI đang kiểm tra động cơ...</div></div>
                    </div>
 
                    <!-- Feature 4: SOS Support -->
@@ -639,7 +639,7 @@
                                <i class="fas fa-info-circle text-blue-500 mr-1"></i> <span id="sos-advice"></span>
                            </div>
                        </div>
-                       <div id="ai-loading-sos" class="hidden mt-4 text-center"><div class="text-red-500 text-xs animate-pulse font-medium">Đang kết nối...</div></div>
+                       <div id="ai-loading-sos" class="hidden mt-4 text-center"><div class="text-red-500 text-xs animate-pulse font-medium">Đang kết nối phiên dịch...</div></div>
                    </div>
 
                </div>
@@ -1058,40 +1058,178 @@
        });
 
 
-       // --- 6. UNIFIED GEMINI AI LOGIC ---
-       const apiKey = ""; // SYSTEM INJECTED KEY
+       // --- 6. SIMULATED AI LOGIC (MÔ PHỎNG - KHÔNG CẦN API KEY) ---
        
-       // Helper to Call API
-       async function callGemini(prompt, signal) {
-            const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
-            
-            // Retry logic
-            const fetchWithRetry = async (retries = 3, delay = 1000) => {
-               try {
-                   const response = await fetch(url, {
-                       method: 'POST',
-                       headers: { 'Content-Type': 'application/json' },
-                       body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] }),
-                       signal: signal
-                   });
-                   if (!response.ok) {
-                        if (response.status === 429 && retries > 0) {
-                            await new Promise(resolve => setTimeout(resolve, delay));
-                            return fetchWithRetry(retries - 1, delay * 2);
-                        }
-                        throw new Error(`HTTP error! status: ${response.status}`);
-                   }
-                   return response.json();
-               } catch (error) {
-                   if (retries > 0 && error.name !== 'AbortError') {
-                       await new Promise(resolve => setTimeout(resolve, delay));
-                       return fetchWithRetry(retries - 1, delay * 2);
-                   }
-                   throw error;
-               }
-            };
+       function simulateAIResponse(promptType, inputData) {
+           return new Promise((resolve) => {
+               // Giả lập thời gian suy nghĩ của AI (1.5 giây)
+               const delay = 1500;
+               
+               setTimeout(() => {
+                   let response = "";
+                   
+                   // Logic phản hồi dựa trên loại câu hỏi
+                   if (promptType === 'plan') {
+                       if (inputData.includes('1 ngày')) {
+                           response = `
+### 🏍️ Lịch Trình 1 Ngày Vi Vu Hà Nội
+*Lộ trình: Long Biên - Phố Cổ - Hồ Tây*
 
-            return fetchWithRetry();
+* **08:00:** Nhận xe tại Văn Chính (Ngõ 5 Nguyễn Văn Cừ). Ăn sáng Bún chả Hàng Than.
+* **09:30:** Check-in Cầu Long Biên lịch sử.
+* **10:30:** Lượn lờ Phố Cổ (Nhà Thờ Lớn, Hồ Gươm).
+* **12:00:** Ăn trưa Phở Bát Đàn hoặc Bún đậu mắm tôm Ngõ Phất Lộc.
+* **14:30:** Di chuyển lên Hồ Tây, uống cafe view hồ (65 Trích Sài).
+* **17:00:** Ngắm hoàng hôn Hồ Tây.
+* **19:00:** Ăn tối Nầm bò nướng Gầm Cầu.
+* **20:30:** Trả xe tại Văn Chính.
+
+**💡 Tip:** Đường Phố Cổ nhiều đường 1 chiều, chú ý biển báo nhé!
+                           `;
+                       } else if (inputData.includes('2 ngày')) {
+                            response = `
+### 🌲 Lịch Trình 2 Ngày 1 Đêm: Sóc Sơn - Hàm Lợn
+*Trốn khói bụi thành phố - Cắm trại chill*
+
+**Ngày 1:**
+* **07:00:** Thuê xe số tại Văn Chính (leo dốc khỏe).
+* **09:00:** Di chuyển hướng Cầu Nhật Tân -> Sóc Sơn.
+* **10:30:** Đến Núi Hàm Lợn. Dựng trại ven hồ.
+* **12:00:** Nướng BBQ ngoài trời.
+* **Chiều:** Trekking rừng thông, chụp ảnh.
+* **Tối:** Đốt lửa trại, ngắm sao.
+
+**Ngày 2:**
+* **06:00:** Đón bình minh, pha cafe.
+* **09:00:** Tham quan Đền Gióng.
+* **12:00:** Ăn gà đồi Sóc Sơn.
+* **15:00:** Khởi hành về Hà Nội, trả xe.
+                            `;
+                       } else {
+                           response = `
+### 🌃 Lịch Trình Buổi Tối Lượn Phố
+* **19:00:** Lấy xe tại Văn Chính.
+* **19:30:** Hóng gió trên cầu Chương Dương (chú ý đi đúng làn xe máy).
+* **20:00:** Lượn vòng hồ Gươm (nếu không phải cuối tuần cấm xe).
+* **21:00:** Ăn kem Tràng Tiền.
+* **22:00:** Làm vòng Hồ Tây, hóng gió mát rượi.
+* **23:00:** Ăn đêm cháo sườn sụn Chợ Đồng Xuân.
+                           `;
+                       }
+                   } 
+                   
+                   else if (promptType === 'food') {
+                       const lowerInput = inputData.toLowerCase();
+                       if (lowerInput.includes('phở')) {
+                           response = `
+### 🍜 Quán Phở Ngon Gần Bạn
+1.  **Phở Lâm - Hàng Vải** (Cách 2km)
+    * Đặc điểm: Lõi rùa giòn sần sật, nước dùng trong.
+    * Giá: 50k - 70k.
+2.  **Phở Lý Quốc Sư** (Gốc)
+    * Đặc điểm: Nổi tiếng, nước dùng đậm đà.
+    * Giá: 60k - 90k.
+3.  **Phở Gà Nguyệt - Phủ Doãn** (Buổi tối)
+    * Đặc điểm: Phở trộn ngon nhất nhì Hà Nội.
+                           `;
+                       } else if (lowerInput.includes('bún')) {
+                           response = `
+### 🥗 Bún Chả & Bún Đậu Must-Try
+1.  **Bún Chả Hương Liên (Obama)** - Lê Văn Hưu
+    * Đã từng đón tổng thống Obama.
+2.  **Bún Đậu Mắm Tôm Hàng Khay**
+    * Full topping dồi sụn, chả cốm.
+3.  **Bún Riêu Cua Hàng Bạc**
+    * Nước dùng chua thanh, riêu cua thật.
+                           `;
+                       } else if (lowerInput.includes('cafe') || lowerInput.includes('cà phê')) {
+                           response = `
+### ☕ Cafe View Đẹp - Sống Ảo
+1.  **Serein Cafe** - Ga Long Biên
+    * View trọn cầu Long Biên cổ kính.
+2.  **Hanoi House Cafe** - Lý Quốc Sư
+    * View nhìn thẳng Nhà Thờ Lớn.
+3.  **Cafe Giảng** - Nguyễn Hữu Huân
+    * Món tủ: Cafe Trứng huyền thoại.
+                           `;
+                       } else {
+                            response = `
+### 😋 Gợi ý ngẫu nhiên cho bạn
+Nếu bạn chưa biết ăn gì, hãy thử **Food Tour Ngọc Lâm** ngay gần Văn Chính:
+1.  **Bánh mì dân tổ** (Đêm).
+2.  **Tào phớ Nghĩa Tân** (Giải nhiệt).
+3.  **Nem nướng Nha Trang** khu Ngọc Lâm.
+Hoặc ghé Phố Cổ ăn **Xôi Yến** Nguyễn Hữu Huân nhé!
+                            `;
+                       }
+                   }
+
+                   else if (promptType === 'mechanic') {
+                       const lowerInput = inputData.toLowerCase();
+                       if (lowerInput.includes('không đề') || lowerInput.includes('tắt máy')) {
+                           response = `
+### ⚠️ Chẩn đoán: Hết ắc quy hoặc Bugi ẩm
+* **Mức độ:** Cần kiểm tra ngay.
+* **Lời khuyên:**
+    1. Thử đạp cần khởi động (nếu là xe số).
+    2. Nếu xe ga, kiểm tra gạt chân chống cạnh chưa?
+    3. Nếu không được, gọi ngay SĐT Văn Chính 0989595533 để được cứu hộ.
+                           `;
+                       } else if (lowerInput.includes('lốp') || lowerInput.includes('xăm') || lowerInput.includes('thủng')) {
+                           response = `
+### ⚠️ Chẩn đoán: Thủng săm/lốp
+* **Mức độ:** Nguy hiểm, không cố đi tiếp.
+* **Lời khuyên:**
+    1. Dừng xe vào lề đường an toàn.
+    2. Tìm tiệm sửa xe gần nhất (tìm "Sửa xe máy" trên Google Maps).
+    3. Tuyệt đối không đi cố sẽ làm hỏng vành xe.
+                           `;
+                       } else if (lowerInput.includes('kêu')) {
+                           response = `
+### ⚠️ Chẩn đoán: Nhông xích khô hoặc bộ nồi
+* **Mức độ:** Cần kiểm tra sớm.
+* **Lời khuyên:**
+    1. Nếu tiếng "lạch cạch" ở hộp xích: Cần tra dầu hoặc tăng xích.
+    2. Nếu tiếng "gào" khi lên ga: Có thể do bộ nồi (côn) bị mòn.
+    3. Hãy ghé qua cửa hàng Văn Chính để thợ kiểm tra miễn phí.
+                           `;
+                       } else {
+                           response = `
+### ℹ️ Tư vấn kỹ thuật
+Hiện tượng bạn mô tả cần được thợ kiểm tra trực tiếp để chính xác nhất.
+* **Lời khuyên:** Đừng lo lắng, hãy gọi video call cho chúng tôi qua Zalo 0989595533, kỹ thuật viên sẽ nghe tiếng máy và bắt bệnh giúp bạn ngay lập tức!
+                           `;
+                       }
+                   }
+
+                   else if (promptType === 'sos') {
+                        // Trả về JSON cho SOS
+                        const jsonResponse = { vietnamese: "", advice: "" };
+                        const lowerInput = inputData.toLowerCase();
+
+                        if (lowerInput.includes('tire') || lowerInput.includes('flat')) {
+                            jsonResponse.vietnamese = "Xin chào, xe của tôi bị thủng lốp. Bạn có thể chỉ giúp tôi chỗ sửa xe gần nhất không?";
+                            jsonResponse.advice = "Walk your bike to avoid rim damage. Look for signs saying 'Sửa Xe' or 'Vá Xe'.";
+                        } else if (lowerInput.includes('lost') || lowerInput.includes('map')) {
+                            jsonResponse.vietnamese = "Tôi bị lạc đường. Làm ơn chỉ giúp tôi đường về khách sạn/địa điểm này?";
+                            jsonResponse.advice = "Show them your hotel address card or Google Maps location on your phone.";
+                        } else if (lowerInput.includes('police') || lowerInput.includes('accident')) {
+                            jsonResponse.vietnamese = "Tôi cần báo công an gấp. Có tai nạn xảy ra ở đây.";
+                            jsonResponse.advice = "Stay calm. Do not move vehicles if it's a serious accident. Call 113 for Police.";
+                        } else if (lowerInput.includes('gas') || lowerInput.includes('petrol')) {
+                            jsonResponse.vietnamese = "Xe tôi hết xăng rồi. Trạm xăng gần nhất ở đâu vậy ạ?";
+                            jsonResponse.advice = "Look for 'Cây Xăng' or 'Petrolimex'. Locals might sell gas in bottles on roadside in emergencies.";
+                        } else {
+                            jsonResponse.vietnamese = "Xin lỗi, tôi là người nước ngoài và tôi cần giúp đỡ. (I need help)";
+                            jsonResponse.advice = "Use simple gestures. Vietnamese people are generally very helpful to tourists.";
+                        }
+                        
+                        response = JSON.stringify(jsonResponse);
+                   }
+
+                   resolve(response);
+               }, delay);
+           });
        }
 
        // Feature 1: Trip Planner
@@ -1107,13 +1245,11 @@
            btn.disabled = true; btn.innerText = "⏳ Đang tính...";
            result.classList.add('hidden'); loading.classList.remove('hidden');
 
-           const prompt = `Bạn là hướng dẫn viên Hà Nội. Viết lịch trình phượt xe máy ${days} khởi hành từ Long Biên. Nêu rõ điểm ăn chơi ngon bổ rẻ. Ngắn gọn, dùng bullet points.`;
-           
            try {
-               const data = await callGemini(prompt);
-               content.innerHTML = DOMPurify.sanitize(marked.parse(data.candidates[0].content.parts[0].text));
+               const data = await simulateAIResponse('plan', days);
+               content.innerHTML = DOMPurify.sanitize(marked.parse(data));
                result.classList.remove('hidden');
-           } catch (e) { alert("Lỗi kết nối AI. Thử lại sau!"); console.error(e); }
+           } catch (e) { alert("Có lỗi xảy ra. Thử lại sau!"); console.error(e); }
            finally { loading.classList.add('hidden'); btn.disabled = false; btn.innerText = "Tạo Lịch Trình"; }
        }
 
@@ -1125,27 +1261,22 @@
            const content = document.getElementById('ai-content-food');
            const loading = document.getElementById('ai-loading-food');
            
-           const loc = document.getElementById('food-location').value || "Hà Nội";
-           const crave = document.getElementById('food-craving').value || "Món ngon";
+           const loc = document.getElementById('food-location').value || "";
+           const crave = document.getElementById('food-craving').value || "";
+           const inputCombined = loc + " " + crave;
            
            btn.disabled = true; btn.innerText = "⏳ Đang tìm...";
            result.classList.add('hidden'); loading.classList.remove('hidden');
-
-           const prompt = `Bạn là thổ địa ăn uống Hà Nội. Tôi đang ở "${loc}" và thèm "${crave}". Hãy gợi ý 3 quán vỉa hè/bình dân ngon nhất gần đó.
-           Format:
-           1. **Tên quán** - Địa chỉ (Giá khoảng ...)
-           - Tại sao ngon: ...
-           Dùng icon món ăn. Ngắn gọn.`;
            
            try {
-               const data = await callGemini(prompt);
-               content.innerHTML = DOMPurify.sanitize(marked.parse(data.candidates[0].content.parts[0].text));
+               const data = await simulateAIResponse('food', inputCombined);
+               content.innerHTML = DOMPurify.sanitize(marked.parse(data));
                result.classList.remove('hidden');
-           } catch (e) { alert("Lỗi kết nối AI. Thử lại sau!"); }
+           } catch (e) { alert("Có lỗi xảy ra. Thử lại sau!"); }
            finally { loading.classList.add('hidden'); btn.disabled = false; btn.innerText = "Tìm Quán Ngon"; }
        }
 
-       // Feature 3: Mechanic Check (NEW)
+       // Feature 3: Mechanic Check
        async function handleAIMechanic(event) {
            event.preventDefault();
            const btn = document.getElementById('btn-generate-mech');
@@ -1158,19 +1289,12 @@
            
            btn.disabled = true; btn.innerText = "⏳ Đang kiểm tra...";
            result.classList.add('hidden'); loading.classList.remove('hidden');
-
-           const prompt = `Bạn là thợ sửa xe máy chuyên nghiệp. Khách hàng mô tả: "${symptom}". 
-           Hãy chẩn đoán nhanh: 
-           1. Nguyên nhân có thể (ngắn gọn). 
-           2. Mức độ nguy hiểm (An toàn/Cần kiểm tra/Dừng ngay).
-           3. Lời khuyên xử lý tạm thời.
-           Dùng icon cảnh báo nếu cần.`;
            
            try {
-               const data = await callGemini(prompt);
-               content.innerHTML = DOMPurify.sanitize(marked.parse(data.candidates[0].content.parts[0].text));
+               const data = await simulateAIResponse('mechanic', symptom);
+               content.innerHTML = DOMPurify.sanitize(marked.parse(data));
                result.classList.remove('hidden');
-           } catch (e) { alert("Lỗi kết nối AI. Thử lại sau!"); }
+           } catch (e) { alert("Có lỗi xảy ra. Thử lại sau!"); }
            finally { loading.classList.add('hidden'); btn.disabled = false; btn.innerText = "Chẩn Đoán Ngay"; }
        }
 
@@ -1188,18 +1312,10 @@
 
            btn.disabled = true; btn.innerHTML = "⏳ Đang dịch...";
            result.classList.add('hidden'); loading.classList.remove('hidden');
-
-           // Prompt to return JSON for easy parsing
-           const prompt = `Translate this issue: "${input}" to natural, polite Vietnamese for a foreigner to show a local mechanic/person. 
-           Then give 1 short safety advice in English (or the language of the input) for this situation in Hanoi.
-           Output JSON format: { "vietnamese": "...", "advice": "..." }`;
            
            try {
-               const data = await callGemini(prompt);
-               const text = data.candidates[0].content.parts[0].text;
-               // Simple cleaner for JSON in case MD code blocks are used
-               const jsonStr = text.replace(/```json|```/g, '').trim();
-               const parsed = JSON.parse(jsonStr);
+               const data = await simulateAIResponse('sos', input);
+               const parsed = JSON.parse(data);
 
                txtVN.textContent = parsed.vietnamese;
                txtAdvice.textContent = parsed.advice;
