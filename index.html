@@ -379,7 +379,6 @@
                            <li><a href="hoankiem.html" class="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-300"><i class="fas fa-map-marker-alt text-orange-500/70"></i> Hoàn Kiếm</a></li>
                            <li><a href="phoco.html" class="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-300"><i class="fas fa-map-marker-alt text-orange-500/70"></i> Phố Cổ</a></li>
                            
-                           <!-- Added new locations as requested -->
                            <li><a href="badinh.html" class="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-300"><i class="fas fa-landmark text-orange-500/70"></i> Ba Đình</a></li>
                            <li><a href="tayho.html" class="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-300"><i class="fas fa-water text-orange-500/70"></i> Tây Hồ</a></li>
                            <li><a href="haibatrung.html" class="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-300"><i class="fas fa-building text-orange-500/70"></i> Hai Bà Trưng</a></li>
@@ -595,29 +594,28 @@
                        <div id="ai-loading-mech" class="hidden mt-4 text-center"><div class="text-blue-500 text-xs animate-pulse font-medium">AI đang kiểm tra động cơ...</div></div>
                    </div>
 
-                   <div class="glass-panel p-6 rounded-2xl relative overflow-hidden flex flex-col h-full border-t-4 border-red-500 hover:shadow-xl transition-shadow bg-red-50/20 dark:bg-red-900/10">
+                   <div class="glass-panel p-6 rounded-2xl relative overflow-hidden flex flex-col h-full border-t-4 border-teal-500 hover:shadow-xl transition-shadow bg-teal-50/20 dark:bg-teal-900/10">
                        <h3 class="text-xl font-bold text-gray-800 dark:text-white mb-2 flex items-center gap-2">
-                           <span class="text-2xl">🆘</span> Trợ Lý SOS
+                           <span class="text-2xl">📋</span> Trợ Lý Thủ Tục
                        </h3>
                        <p class="text-sm text-gray-600 dark:text-gray-300 mb-4 flex-1">
-                           Dịch vấn đề sang tiếng Việt để nhờ người dân giúp đỡ và nhận lời khuyên.
+                           Thủ tục thuê xe máy đặt cọc từ 1 triệu đến 5 triệu và thanh toán. Chọn đối tượng để xem chi tiết.
                        </p>
-                       <form onsubmit="handleAISupport(event)" class="space-y-4">
-                           <input type="text" id="sos-input" placeholder="Nhập vấn đề (VD: Flat tire...)" class="w-full p-2.5 rounded-lg bg-white/80 dark:bg-gray-800/80 border border-red-200 dark:border-red-800 outline-none text-sm focus:ring-2 focus:ring-red-500">
-                           <button type="submit" id="btn-generate-sos" class="w-full py-2.5 bg-red-600 hover:bg-red-700 text-white font-bold rounded-lg shadow-md transition-colors text-sm">
-                               Dịch & Hỗ Trợ
+                       <form onsubmit="handleAIProcedure(event)" class="space-y-4">
+                           <select id="proc-input" class="w-full p-2.5 rounded-lg bg-white/80 dark:bg-gray-800/80 border border-teal-200 dark:border-teal-800 outline-none text-sm focus:ring-2 focus:ring-teal-500">
+                               <option value="student">Sinh viên (Đi học/Đi làm)</option>
+                               <option value="tourist">Khách du lịch (Trong nước/Quốc tế)</option>
+                               <option value="worker">Người đi làm (Nội thành)</option>
+                               <option value="luxury">Thuê xe SH/Cao cấp</option>
+                           </select>
+                           <button type="submit" id="btn-generate-proc" class="w-full py-2.5 bg-teal-600 hover:bg-teal-700 text-white font-bold rounded-lg shadow-md transition-colors text-sm">
+                               Tra Cứu Cọc & Thủ Tục
                            </button>
                        </form>
-                       <div id="ai-result-sos" class="hidden mt-4 pt-4 border-t border-gray-200/50 space-y-3">
-                           <div class="bg-white dark:bg-gray-800 p-3 rounded-lg border-2 border-red-500 text-center shadow-inner">
-                               <div class="text-[10px] text-gray-500 uppercase font-bold mb-1">Đưa điện thoại cho người dân:</div>
-                               <div id="sos-vietnamese" class="text-lg font-black text-gray-900 dark:text-white leading-tight"></div>
-                           </div>
-                           <div class="bg-blue-50 dark:bg-gray-700/50 p-2 rounded-lg text-xs text-gray-700 dark:text-gray-200 italic">
-                               <i class="fas fa-info-circle text-blue-500 mr-1"></i> <span id="sos-advice"></span>
-                           </div>
+                       <div id="ai-result-proc" class="hidden mt-4 pt-4 border-t border-gray-200/50">
+                           <div id="ai-content-proc" class="prose-custom text-xs leading-relaxed max-h-[150px] overflow-y-auto pr-2 custom-scrollbar text-gray-700 dark:text-gray-300"></div>
                        </div>
-                       <div id="ai-loading-sos" class="hidden mt-4 text-center"><div class="text-red-500 text-xs animate-pulse font-medium">Đang kết nối phiên dịch...</div></div>
+                       <div id="ai-loading-proc" class="hidden mt-4 text-center"><div class="text-teal-500 text-xs animate-pulse font-medium">Đang tra cứu thủ tục...</div></div>
                    </div>
 
                </div>
@@ -805,7 +803,6 @@
                        <a href="https://share.google/HKoX2vDQkEkdAOSZE" target="_blank" rel="noopener noreferrer" class="w-8 h-8 rounded-full bg-gray-800 flex items-center justify-center hover:bg-red-500 transition-colors text-white" aria-label="Google Map">
                            <i class="fas fa-map-marked-alt text-sm"></i>
                        </a>
-                       <!-- Replaced TripAdvisor with Star icon as requested (thay icon avg hiện nhé) -->
                        <a href="https://www.tripadvisor.com.vn/Attraction_Review-g293924-d34112208-Reviews-Cho_Thue_Xe_May_Van_Chinh-Hanoi.html" target="_blank" rel="noopener noreferrer" class="w-8 h-8 rounded-full bg-gray-800 flex items-center justify-center hover:bg-yellow-500 transition-colors text-white" aria-label="TripAdvisor Reviews">
                            <i class="fas fa-star text-sm"></i>
                        </a>
@@ -824,8 +821,7 @@
                        <li><a href="https://chothuexemayohanoi.github.io/vanchinh/" class="hover:text-brand-400 transition-colors"><i class="fas fa-home text-xs mr-2 text-gray-500"></i>Trang Chủ</a></li>
                        <li><a href="gioithieu.html" class="hover:text-brand-400 transition-colors"><i class="fas fa-info-circle text-xs mr-2 text-gray-500"></i>Giới Thiệu</a></li>
                        <li><a href="banggia.html" class="hover:text-brand-400 transition-colors"><i class="fas fa-tags text-xs mr-2 text-gray-500"></i>Bảng Giá</a></li>
-                       <!-- Removed danhgia.html as requested -->
-                   </ul>
+                       </ul>
                </div>
 
                <div class="footer-group border-b border-gray-700 pb-2 md:border-none md:pb-0">
@@ -839,7 +835,6 @@
                        <li><a href="hoankiem.html" class="hover:text-brand-400 transition-colors"><i class="fas fa-map-marker-alt text-xs mr-2 text-brand-500"></i>Hoàn Kiếm</a></li>
                        <li><a href="phoco.html" class="hover:text-brand-400 transition-colors"><i class="fas fa-map-marker-alt text-xs mr-2 text-brand-500"></i>Phố Cổ</a></li>
                        
-                       <!-- Added new locations to footer -->
                        <li><a href="badinh.html" class="hover:text-brand-400 transition-colors"><i class="fas fa-landmark text-xs mr-2 text-brand-500"></i>Ba Đình</a></li>
                        <li><a href="tayho.html" class="hover:text-brand-400 transition-colors"><i class="fas fa-water text-xs mr-2 text-brand-500"></i>Tây Hồ</a></li>
                        <li><a href="haibatrung.html" class="hover:text-brand-400 transition-colors"><i class="fas fa-building text-xs mr-2 text-brand-500"></i>Hai Bà Trưng</a></li>
@@ -881,10 +876,9 @@
                            <i class="fas fa-envelope mr-2 text-brand-500 text-xs"></i>
                            <a href="mailto:vanchinhnguyen1702@gmail.com" class="hover:text-white transition-colors">vanchinhnguyen1702@gmail.com</a>
                         </li>
-                        <!-- Added Opening Hours -->
-                        <li class="flex items-center text-yellow-500 font-semibold">
-                            <i class="fas fa-clock mr-2 text-xs"></i>
-                            <span>Giờ mở cửa: 9h - 21h</span>
+                        <li class="flex items-center">
+                            <i class="fas fa-clock mr-2 text-brand-500 text-xs"></i>
+                            <span class="text-gray-300">Giờ mở cửa: 9h - 21h</span>
                         </li>
                     </ul>
                </div>
@@ -1232,29 +1226,51 @@ Hiện tượng bạn mô tả cần được thợ kiểm tra trực tiếp đ�
                        }
                    }
 
-                   else if (promptType === 'sos') {
-                        // Trả về JSON cho SOS
-                        const jsonResponse = { vietnamese: "", advice: "" };
-                        const lowerInput = inputData.toLowerCase();
-
-                        if (lowerInput.includes('tire') || lowerInput.includes('flat')) {
-                            jsonResponse.vietnamese = "Xin chào, xe của tôi bị thủng lốp. Bạn có thể chỉ giúp tôi chỗ sửa xe gần nhất không?";
-                            jsonResponse.advice = "Walk your bike to avoid rim damage. Look for signs saying 'Sửa Xe' or 'Vá Xe'.";
-                        } else if (lowerInput.includes('lost') || lowerInput.includes('map')) {
-                            jsonResponse.vietnamese = "Tôi bị lạc đường. Làm ơn chỉ giúp tôi đường về khách sạn/địa điểm này?";
-                            jsonResponse.advice = "Show them your hotel address card or Google Maps location on your phone.";
-                        } else if (lowerInput.includes('police') || lowerInput.includes('accident')) {
-                            jsonResponse.vietnamese = "Tôi cần báo công an gấp. Có tai nạn xảy ra ở đây.";
-                            jsonResponse.advice = "Stay calm. Do not move vehicles if it's a serious accident. Call 113 for Police.";
-                        } else if (lowerInput.includes('gas') || lowerInput.includes('petrol')) {
-                            jsonResponse.vietnamese = "Xe tôi hết xăng rồi. Trạm xăng gần nhất ở đâu vậy ạ?";
-                            jsonResponse.advice = "Look for 'Cây Xăng' or 'Petrolimex'. Locals might sell gas in bottles on roadside in emergencies.";
+                   else if (promptType === 'procedure') {
+                        // LOGIC MỚI CHO TRỢ LÝ THỦ TỤC
+                        if (inputData === 'student') {
+                            response = `
+### 🎓 Thủ Tục Cho Sinh Viên
+* **Mức cọc:** 1.000.000 VNĐ - 2.000.000 VNĐ (Tùy loại xe).
+* **Giấy tờ cần thiết:**
+    1. CMND/CCCD gốc.
+    2. Thẻ Sinh Viên (hoặc xác nhận nhập học).
+    3. Bằng lái xe (Chụp ảnh).
+* **Thanh toán:** Chuyển khoản hoặc Tiền mặt.
+* **Ưu đãi:** Giảm 10% khi thuê theo tháng.
+                            `;
+                        } else if (inputData === 'tourist') {
+                            response = `
+### ✈️ Thủ Tục Cho Khách Du Lịch
+* **Mức cọc:**
+    * Xe số: 1.000.000 VNĐ.
+    * Xe ga: 2.000.000 VNĐ.
+* **Giấy tờ:**
+    1. Căn cước công dân hoặc Hộ chiếu (Passport).
+    2. Vé máy bay khứ hồi (nếu có để giảm cọc).
+* **Lưu ý:** Có thể để lại Passport thay tiền cọc.
+                            `;
+                        } else if (inputData === 'luxury') {
+                            response = `
+### 💎 Thủ Tục Thuê Xe SH/Cao Cấp
+* **Mức cọc:** 3.000.000 VNĐ - 5.000.000 VNĐ.
+* **Giấy tờ:**
+    1. CMND/CCCD gắn chip.
+    2. Hộ khẩu hoặc xác minh nơi ở.
+* **Thanh toán:** Thanh toán trước tiền thuê.
+* **Lưu ý:** Kiểm tra kỹ hiện trạng xe trước khi nhận.
+                            `;
                         } else {
-                            jsonResponse.vietnamese = "Xin lỗi, tôi là người nước ngoài và tôi cần giúp đỡ. (I need help)";
-                            jsonResponse.advice = "Use simple gestures. Vietnamese people are generally very helpful to tourists.";
+                            response = `
+### 💼 Thủ Tục Cho Người Đi Làm/Nội Thành
+* **Mức cọc:** 1.500.000 VNĐ - 3.000.000 VNĐ.
+* **Giấy tờ:**
+    1. CCCD gắn chip chính chủ.
+    2. Bằng lái xe.
+* **Thanh toán:** Linh hoạt (Cọc + Tiền thuê).
+* **Hỗ trợ:** Giao xe tận nơi miễn phí bán kính 3km.
+                            `;
                         }
-                        
-                        response = JSON.stringify(jsonResponse);
                    }
 
                    resolve(response);
@@ -1328,33 +1344,29 @@ Hiện tượng bạn mô tả cần được thợ kiểm tra trực tiếp đ�
            finally { loading.classList.add('hidden'); btn.disabled = false; btn.innerText = "Chẩn Đoán Ngay"; }
        }
 
-       // Feature 4: SOS Support
-       async function handleAISupport(event) {
+       // Feature 4: Procedure Assistant (NEW) - REPLACED SOS
+       async function handleAIProcedure(event) {
            event.preventDefault();
-           const btn = document.getElementById('btn-generate-sos');
-           const result = document.getElementById('ai-result-sos');
-           const txtVN = document.getElementById('sos-vietnamese');
-           const txtAdvice = document.getElementById('sos-advice');
-           const loading = document.getElementById('ai-loading-sos');
+           const btn = document.getElementById('btn-generate-proc');
+           const result = document.getElementById('ai-result-proc');
+           const content = document.getElementById('ai-content-proc');
+           const loading = document.getElementById('ai-loading-proc');
            
-           const input = document.getElementById('sos-input').value;
-           if (!input) return;
+           const userType = document.getElementById('proc-input').value;
+           if (!userType) return;
 
-           btn.disabled = true; btn.innerHTML = "⏳ Đang dịch...";
+           btn.disabled = true; btn.innerHTML = "⏳ Đang tra cứu...";
            result.classList.add('hidden'); loading.classList.remove('hidden');
            
            try {
-               const data = await simulateAIResponse('sos', input);
-               const parsed = JSON.parse(data);
-
-               txtVN.textContent = parsed.vietnamese;
-               txtAdvice.textContent = parsed.advice;
+               const data = await simulateAIResponse('procedure', userType);
+               content.innerHTML = DOMPurify.sanitize(marked.parse(data));
                result.classList.remove('hidden');
            } catch (e) { 
                console.error(e);
-               alert("Không thể dịch lúc này. Vui lòng thử lại.");
+               alert("Không thể tra cứu lúc này. Vui lòng thử lại.");
            }
-           finally { loading.classList.add('hidden'); btn.disabled = false; btn.innerHTML = `<i class="fas fa-language mr-1"></i> Dịch & Hỗ Trợ`; }
+           finally { loading.classList.add('hidden'); btn.disabled = false; btn.innerHTML = "Tra Cứu Cọc & Thủ Tục"; }
        }
 
    </script>
