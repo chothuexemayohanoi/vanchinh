@@ -177,17 +177,6 @@
            background-image: linear-gradient(to right, #2563eb, #9333ea);
        }
 
-       .typing-dot {
-           animation: typing 1.4s infinite ease-in-out both;
-       }
-       .typing-dot:nth-child(1) { animation-delay: -0.32s; }
-       .typing-dot:nth-child(2) { animation-delay: -0.16s; }
-       
-       @keyframes typing {
-           0%, 80%, 100% { transform: scale(0); }
-           40% { transform: scale(1); }
-       }
-
        .ambient-bg {
            position: fixed;
            top: 0;
@@ -233,6 +222,15 @@
        }
        .footer-chevron {
            transition: transform 0.3s ease;
+       }
+
+       /* Smooth Accordion Details */
+       details[open] summary ~ * {
+           animation: sweep .3s ease-in-out;
+       }
+       @keyframes sweep {
+           0%    {opacity: 0; margin-top: -10px}
+           100%  {opacity: 1; margin-top: 0px}
        }
    </style>
    <script>
@@ -544,9 +542,9 @@
            </div>
        </section>
 
-       <article class="container mx-auto px-4 py-16 space-y-16 max-w-4xl relative z-10">
+       <article class="container mx-auto px-4 py-16 space-y-20 max-w-5xl relative z-10">
            
-           <!-- AI Features (Giữ nguyên giao diện và code JS, không thay đổi) -->
+           <!-- AI Features -->
            <section id="ai-features" class="space-y-6 scroll-mt-24">
                <div class="flex items-center gap-3">
                    <span class="text-3xl">🤖</span>
@@ -596,7 +594,7 @@
 
                    <div class="glass-panel p-6 rounded-2xl relative overflow-hidden flex flex-col h-full border-t-4 border-teal-500 hover:shadow-xl transition-shadow bg-teal-50/20 dark:bg-teal-900/10">
                        <h3 class="text-xl font-bold text-gray-800 dark:text-white mb-2 flex items-center gap-2"><span class="text-2xl">📋</span> Trợ Lý Thủ Tục</h3>
-                       <p class="text-sm text-gray-600 dark:text-gray-300 mb-4 flex-1">Tư vấn <a href="thutuc.html" class="text-teal-600 hover:underline">thủ tục thuê xe</a> máy và đặt cọc một cách cá nhân hóa.</p>
+                       <p class="text-sm text-gray-600 dark:text-gray-300 mb-4 flex-1">Tư vấn thủ tục thuê xe máy và đặt cọc một cách cá nhân hóa.</p>
                        <form onsubmit="handleAIProcedure(event)" class="space-y-4">
                            <select id="proc-input" class="w-full p-2.5 rounded-lg bg-white/80 dark:bg-gray-800/80 border border-teal-200 dark:border-teal-800 outline-none text-sm focus:ring-2 focus:ring-teal-500">
                                <option value="student">Sinh viên (Đi học/Đi làm thêm)</option>
@@ -612,7 +610,7 @@
                </div>
            </section>
 
-           <!-- SEO ULTRA: Mở rộng sâu sắc nội dung Giới thiệu -->
+           <!-- About Section -->
            <section id="about" class="space-y-6">
                <h2 class="text-3xl font-bold text-gray-900 dark:text-white border-l-4 border-brand-500 pl-4">Vì Sao Thương Hiệu Cho Thuê Xe Máy Hà Nội - Văn Chính Được Hàng Ngàn Khách Hàng Lựa Chọn?</h2>
                
@@ -621,7 +619,7 @@
                        <i class="fas fa-city text-gray-400 mr-1"></i> Hà Nội - Trái tim của cả nước, nơi giao thoa giữa nhịp sống hối hả hiện đại và vẻ đẹp trầm mặc của 36 phố phường. Để thực sự cảm nhận được "hồn cốt" của Thủ đô, len lỏi qua từng con ngõ nhỏ ngửi mùi hoa sữa, hay lượn vòng quanh Hồ Tây lộng gió vào buổi chiều tà, không có phương tiện nào hoàn hảo hơn một chiếc xe máy. Đó chính là lý do nhu cầu <strong>mướn xe máy Hà Nội</strong> luôn bùng nổ quanh năm. Tuy nhiên, việc tìm được một cơ sở cung cấp xe tốt, máy êm, không chết máy giữa đường lại là một bài toán khó với nhiều du khách.
                    </p>
                    <p>
-                       <i class="fas fa-map-pin text-red-400 mr-1"></i> Thấu hiểu được nỗi lo lắng đó, hệ thống <strong><a href="https://chothuexemayohanoi.github.io/vanchinh/" class="text-brand-600 font-semibold hover:underline">Cho thuê xe máy Hà Nội - Văn Chính</a></strong> ra đời với sứ mệnh mang đến sự an tâm tuyệt đối cho mọi khách hàng. Nằm tọa lạc tại trung tâm cửa ngõ phía Đông Thủ đô: <strong>Số 24 Ngõ 5 Nguyễn Văn Cừ, Ngọc Lâm, quận Long Biên</strong>, cửa hàng chúng tôi là điểm đến chiến lược, vô cùng thuận tiện cho du khách cần <a href="longbien.html" class="text-brand-600 hover:underline">thuê xe máy tại Long Biên</a> hoặc di chuyển qua cầu Chương Dương để sang <a href="phoco.html" class="text-brand-600 hover:underline">khám phá Phố Cổ</a>, Hồ Hoàn Kiếm chỉ mất chưa đầy 5 phút.
+                       <i class="fas fa-map-pin text-red-400 mr-1"></i> Thấu hiểu được nỗi lo lắng đó, hệ thống <strong><a href="https://chothuexemayohanoi.github.io/vanchinh/" class="text-brand-600 font-semibold hover:underline">Cho thuê xe máy Hà Nội - Văn Chính</a></strong> ra đời với sứ mệnh mang đến sự an tâm tuyệt đối cho mọi khách hàng. Nằm tọa lạc tại trung tâm cửa ngõ phía Đông Thủ đô: <strong>Số 24 Ngõ 5 Nguyễn Văn Cừ, Ngọc Lâm, quận Long Biên</strong>, cửa hàng chúng tôi là điểm đến chiến lược, vô cùng thuận tiện cho du khách cần thuê xe máy tại Long Biên hoặc di chuyển qua cầu Chương Dương để sang khám phá Phố Cổ, Hồ Hoàn Kiếm chỉ mất chưa đầy 5 phút.
                    </p>
                    <p>
                        <i class="fas fa-motorcycle text-brand-500 mr-1"></i> <strong>Chất lượng xe làm nên thương hiệu:</strong> Không giống như các dịch vụ chạy theo số lượng, tại Văn Chính, 100% dàn xe tay ga (Honda Vision, Air Blade, Lead) và xe số (Honda Wave Alpha, Sirius, Blade) đều được chúng tôi tuyển chọn kỹ lưỡng, mua mới và bảo dưỡng định kỳ thay dầu mỡ hàng tháng. Chúng tôi tự tin xe bốc, phanh ăn, lốp dày dặn, đáp ứng hoàn hảo cả việc chạy dạo trong nội thành đông đúc lẫn những chuyến phượt ngoại ô dài ngày như leo đền Gióng (Sóc Sơn) hay vườn quốc gia Ba Vì.
@@ -656,146 +654,325 @@
                </div>
            </section>
 
-           <!-- SEO ULTRA: Chi tiết hóa bảng giá và ưu đãi -->
-           <section id="pricing" class="space-y-6">
-               <h2 class="text-3xl font-bold text-gray-900 dark:text-white border-l-4 border-brand-500 pl-4">Cập Nhật Bảng Giá Thuê Xe Máy Hà Nội - Rẻ Nhất Mọi Phân Khúc</h2>
-               <p class="text-gray-600 dark:text-gray-300 leading-relaxed">
-                   Tại Văn Chính, mức giá được niêm yết công khai, minh bạch, tuyệt đối <strong>KHÔNG CÓ CHI PHÍ ẨN</strong>. Khi xem <a href="banggia.html" class="text-brand-600 hover:underline">bảng giá thuê xe máy</a> của chúng tôi, mức phí bạn thấy đã bao gồm toàn bộ các trang bị an toàn cơ bản nhất. Mỗi chiếc xe giao đi đều được trang bị sẵn: 02 Mũ bảo hiểm đạt chuẩn an toàn giao thông, 02 áo mưa tiện lợi loại dày dặn, và 1 lít xăng miễn phí có sẵn trong bình để bạn thoải mái tìm trạm xăng gần nhất.
-               </p>
+           <!-- PRICING CARDS UPGRADE -->
+           <section id="pricing" class="space-y-8">
+               <div class="text-center max-w-3xl mx-auto space-y-4">
+                   <h2 class="text-3xl font-bold text-gray-900 dark:text-white inline-block border-b-4 border-brand-500 pb-2">Bảng Giá Thuê Xe Máy Chi Tiết</h2>
+                   <p class="text-gray-600 dark:text-gray-300">
+                       Mức giá được niêm yết công khai, minh bạch, <strong>KHÔNG CÓ CHI PHÍ ẨN</strong>. Mỗi xe giao đi đều kèm sẵn: 02 Mũ bảo hiểm chuẩn, 02 áo mưa, và 1 lít xăng miễn phí.
+                   </p>
+               </div>
 
-               <div class="glass-panel overflow-hidden rounded-xl">
-                   <table class="w-full text-left border-collapse">
-                       <thead class="bg-brand-600/90 text-white backdrop-blur-sm">
-                           <tr>
-                               <th class="p-4 text-sm font-semibold tracking-wide">Phân Khúc Xe</th>
-                               <th class="p-4 text-sm font-semibold tracking-wide">Đại Diện Dòng Xe Phổ Biến</th>
-                               <th class="p-4 text-sm font-semibold tracking-wide">Chi Phí / Ngày</th>
-                               <th class="p-4 text-sm font-semibold tracking-wide">Chi Phí / Tuần (Ưu Đãi)</th>
-                           </tr>
-                       </thead>
-                       <tbody class="divide-y divide-gray-200/50 dark:divide-gray-700/50 text-gray-700 dark:text-gray-200">
-                           <tr class="hover:bg-white/30 dark:hover:bg-gray-700/30 transition-colors">
-                               <td class="p-4 font-bold text-brand-600 dark:text-brand-400"><i class="fas fa-motorcycle mr-2"></i>Xe Số Thể Thao</td>
-                               <td class="p-4">Honda Wave Alpha 110cc, Yamaha Sirius Fi, Honda Blade. Phù hợp leo dốc, đi phượt.</td>
-                               <td class="p-4"><span class="font-bold text-red-500">150.000 VNĐ</span></td>
-                               <td class="p-4">900.000 VNĐ <span class="text-xs text-gray-500">(Tiết kiệm 150k)</span></td>
-                           </tr>
-                           <tr class="hover:bg-white/30 dark:hover:bg-gray-700/30 transition-colors">
-                               <td class="p-4 font-bold text-brand-600 dark:text-brand-400"><i class="fas fa-biking mr-2"></i>Xe Ga Phổ Thông</td>
-                               <td class="p-4">Honda Vision, Yamaha Janus, Suzuki Address. Dễ đi, cốp rộng, dạo phố cực êm.</td>
-                               <td class="p-4"><span class="font-bold text-red-500">200.000 VNĐ</span></td>
-                               <td class="p-4">1.200.000 VNĐ <span class="text-xs text-gray-500">(Tiết kiệm 200k)</span></td>
-                           </tr>
-                           <tr class="hover:bg-white/30 dark:hover:bg-gray-700/30 transition-colors">
-                               <td class="p-4 font-bold text-brand-600 dark:text-brand-400"><i class="fas fa-gem mr-2"></i>Xe Ga Đời Mới/Cao Cấp</td>
-                               <td class="p-4">Honda AirBlade 125/150, Honda Lead 2023. Tôn dáng, máy cực khỏe, cốp "khổng lồ".</td>
-                               <td class="p-4"><span class="font-bold text-red-500">250.000 VNĐ</span></td>
-                               <td class="p-4">1.500.000 VNĐ <span class="text-xs text-gray-500">(Tiết kiệm 250k)</span></td>
-                           </tr>
-                       </tbody>
-                   </table>
+               <div class="grid md:grid-cols-3 gap-8">
+                   <!-- Card 1: Xe Số -->
+                   <div class="glass-panel rounded-2xl p-8 relative hover:-translate-y-2 transition-transform duration-300 border-t-4 border-blue-500 flex flex-col bg-white/40 dark:bg-gray-800/40">
+                       <div class="absolute top-0 right-0 bg-blue-500 text-white text-xs font-bold px-3 py-1 rounded-bl-lg rounded-tr-lg">Phượt Dã Ngoại</div>
+                       <div class="text-center mb-6">
+                           <div class="w-16 h-16 mx-auto bg-blue-100 dark:bg-blue-900/50 rounded-full flex items-center justify-center mb-4 text-blue-600 dark:text-blue-400">
+                               <i class="fas fa-motorcycle text-3xl"></i>
+                           </div>
+                           <h3 class="text-xl font-bold text-gray-900 dark:text-white">Xe Số Thể Thao</h3>
+                           <p class="text-sm text-gray-500 dark:text-gray-400 mt-2">Wave Alpha, Sirius, Blade</p>
+                       </div>
+                       
+                       <div class="text-center mb-6 border-b border-gray-200 dark:border-gray-700 pb-6">
+                           <span class="text-4xl font-extrabold text-blue-600 dark:text-blue-400">150k</span>
+                           <span class="text-gray-500 dark:text-gray-400 font-medium">/ Ngày</span>
+                       </div>
+                       
+                       <ul class="space-y-4 mb-8 flex-1 text-gray-700 dark:text-gray-300 text-sm">
+                           <li class="flex items-center"><i class="fas fa-check text-green-500 mr-3"></i> <strong>Thuê Tuần:</strong> 600.000đ - 900.000đ</li>
+                           <li class="flex items-center"><i class="fas fa-check text-green-500 mr-3"></i> <strong>Thuê Tháng:</strong> 800.000đ - 1.200.000đ</li>
+                           <li class="flex items-center"><i class="fas fa-shield-alt text-blue-500 mr-3"></i> <strong>Tiền Cọc:</strong> Chỉ từ 2.000.000đ</li>
+                           <li class="flex items-center"><i class="fas fa-star text-yellow-500 mr-3"></i> Phù hợp leo dốc, đi đường dài</li>
+                       </ul>
+                       
+                       <a href="tel:0989595533" class="w-full block text-center bg-blue-100 hover:bg-blue-600 text-blue-700 hover:text-white dark:bg-blue-900/40 dark:text-blue-300 dark:hover:bg-blue-600 dark:hover:text-white transition-colors font-bold py-3 rounded-xl border border-blue-200 dark:border-blue-800">
+                           Đặt Xe Số Ngay
+                       </a>
+                   </div>
+
+                   <!-- Card 2: Xe Ga Phổ Thông -->
+                   <div class="glass-panel rounded-2xl p-8 relative hover:-translate-y-2 transition-transform duration-300 border-t-4 border-brand-500 flex flex-col bg-brand-50/40 dark:bg-brand-900/10 transform md:scale-105 shadow-xl z-10">
+                       <div class="absolute top-0 right-0 bg-brand-500 text-white text-xs font-bold px-3 py-1 rounded-bl-lg rounded-tr-lg animate-pulse">Phổ Biến Nhất</div>
+                       <div class="text-center mb-6">
+                           <div class="w-16 h-16 mx-auto bg-brand-100 dark:bg-brand-900/50 rounded-full flex items-center justify-center mb-4 text-brand-600 dark:text-brand-400">
+                               <i class="fas fa-biking text-3xl"></i>
+                           </div>
+                           <h3 class="text-xl font-bold text-gray-900 dark:text-white">Xe Ga Phổ Thông</h3>
+                           <p class="text-sm text-gray-500 dark:text-gray-400 mt-2">Vision, Janus, Address</p>
+                       </div>
+                       
+                       <div class="text-center mb-6 border-b border-gray-200 dark:border-gray-700 pb-6">
+                           <span class="text-4xl font-extrabold text-brand-600 dark:text-brand-400">200k</span>
+                           <span class="text-gray-500 dark:text-gray-400 font-medium">/ Ngày</span>
+                       </div>
+                       
+                       <ul class="space-y-4 mb-8 flex-1 text-gray-700 dark:text-gray-300 text-sm">
+                           <li class="flex items-center"><i class="fas fa-check text-green-500 mr-3"></i> <strong>Thuê Tuần:</strong> 800.000đ - 1.000.000đ</li>
+                           <li class="flex items-center"><i class="fas fa-check text-green-500 mr-3"></i> <strong>Thuê Tháng:</strong> 1.200.000đ - 1.500.000đ</li>
+                           <li class="flex items-center"><i class="fas fa-shield-alt text-brand-500 mr-3"></i> <strong>Tiền Cọc:</strong> Chỉ từ 3.000.000đ</li>
+                           <li class="flex items-center"><i class="fas fa-star text-yellow-500 mr-3"></i> Dễ đi, cốp rộng, dạo phố êm ái</li>
+                       </ul>
+                       
+                       <a href="tel:0989595533" class="w-full block text-center bg-brand-600 hover:bg-brand-700 text-white transition-colors font-bold py-3 rounded-xl shadow-lg">
+                           Đặt Xe Ga Ngay
+                       </a>
+                   </div>
+
+                   <!-- Card 3: Xe Ga Cao Cấp -->
+                   <div class="glass-panel rounded-2xl p-8 relative hover:-translate-y-2 transition-transform duration-300 border-t-4 border-purple-500 flex flex-col bg-white/40 dark:bg-gray-800/40">
+                       <div class="absolute top-0 right-0 bg-purple-500 text-white text-xs font-bold px-3 py-1 rounded-bl-lg rounded-tr-lg">Sang Trọng</div>
+                       <div class="text-center mb-6">
+                           <div class="w-16 h-16 mx-auto bg-purple-100 dark:bg-purple-900/50 rounded-full flex items-center justify-center mb-4 text-purple-600 dark:text-purple-400">
+                               <i class="fas fa-gem text-3xl"></i>
+                           </div>
+                           <h3 class="text-xl font-bold text-gray-900 dark:text-white">Xe Ga Cao Cấp</h3>
+                           <p class="text-sm text-gray-500 dark:text-gray-400 mt-2">AirBlade 125/150, Lead Đời Mới</p>
+                       </div>
+                       
+                       <div class="text-center mb-6 border-b border-gray-200 dark:border-gray-700 pb-6">
+                           <span class="text-4xl font-extrabold text-purple-600 dark:text-purple-400">250k</span>
+                           <span class="text-gray-500 dark:text-gray-400 font-medium">/ Ngày</span>
+                       </div>
+                       
+                       <ul class="space-y-4 mb-8 flex-1 text-gray-700 dark:text-gray-300 text-sm">
+                           <li class="flex items-center"><i class="fas fa-check text-green-500 mr-3"></i> <strong>Thuê Tuần:</strong> Từ 900.000đ</li>
+                           <li class="flex items-center"><i class="fas fa-check text-green-500 mr-3"></i> <strong>Thuê Tháng:</strong> 1.500.000đ - 2.000.000đ</li>
+                           <li class="flex items-center"><i class="fas fa-shield-alt text-purple-500 mr-3"></i> <strong>Tiền Cọc:</strong> Từ 5.000.000đ</li>
+                           <li class="flex items-center"><i class="fas fa-star text-yellow-500 mr-3"></i> Máy cực khỏe, dáng thể thao/cốp to</li>
+                       </ul>
+                       
+                       <a href="tel:0989595533" class="w-full block text-center bg-purple-100 hover:bg-purple-600 text-purple-700 hover:text-white dark:bg-purple-900/40 dark:text-purple-300 dark:hover:bg-purple-600 dark:hover:text-white transition-colors font-bold py-3 rounded-xl border border-purple-200 dark:border-purple-800">
+                           Đặt Xe Cao Cấp
+                       </a>
+                   </div>
                </div>
                
-               <div class="glass-panel p-5 mt-4 bg-yellow-50/40 border-l-4 border-yellow-400 rounded-r-xl">
+               <div class="glass-panel p-5 bg-yellow-50/40 border-l-4 border-yellow-400 rounded-r-xl">
                    <p class="font-bold text-yellow-800 dark:text-yellow-200 text-lg mb-2">
-                       <i class="fas fa-bullhorn mr-2 animate-bounce"></i> Siêu Khuyến Mãi & Hỗ Trợ Đường Dài:
+                       <i class="fas fa-bullhorn mr-2 animate-bounce"></i> Siêu Khuyến Mãi Đặc Biệt:
                    </p>
-                   <ul class="list-disc pl-6 text-yellow-700 dark:text-yellow-300 space-y-1">
-                       <li>Khách hàng có nhu cầu <strong>thuê xe máy theo tháng</strong> để đi làm, thực tập nội thành sẽ được hưởng mức giá sỉ cực sốc (Giảm từ 30% - 40% so với giá thuê ngày).</li>
-                       <li>Sinh viên mang thẻ SV đến nhận xe tận cửa hàng sẽ được trừ ngay 10% tổng bill hóa đơn.</li>
-                       <li>Cam kết tặng thêm dây thun chằng đồ, hỗ trợ bọc nilon bảo vệ balo miễn phí cho dân phượt. Nhấc máy gọi đường dây nóng <a href="tel:0989595533" class="underline font-bold hover:text-yellow-600">0989 595 533</a> để chốt deal ngay!</li>
-                   </ul>
+                   <p class="text-yellow-700 dark:text-yellow-300 text-sm md:text-base">
+                        Sinh viên mang thẻ SV đến nhận xe tận cửa hàng sẽ được <strong>trừ ngay 10% tổng bill</strong> hóa đơn. Cam kết tặng thêm dây thun chằng đồ, hỗ trợ bọc nilon bảo vệ balo miễn phí cho dân phượt!
+                   </p>
                </div>
            </section>
 
-           <section id="location" class="space-y-6">
-               <h2 class="text-3xl font-bold text-gray-900 dark:text-white border-l-4 border-brand-500 pl-4">Quy Trình Giao Nhận & Vị Trí Cửa Hàng Tại Long Biên</h2>
-               
-               <div class="grid md:grid-cols-2 gap-8 items-start">
-                   <div class="glass-panel p-6 rounded-xl">
-                       <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3"><i class="fas fa-clipboard-check mr-2 text-brand-500"></i>Các bước thuê xe cực kỳ tối giản:</h3>
-                       <p class="text-gray-600 dark:text-gray-300 text-sm mb-4">Chúng tôi biết thời gian đi du lịch của bạn là vàng bạc. Quên đi những tờ khai giấy lằng nhằng, tại Văn Chính, bạn chỉ mất đúng 5 phút đồng hồ cho toàn bộ quy trình.</p>
-                       <ol class="list-decimal pl-5 space-y-3 text-gray-700 dark:text-gray-300">
-                           <li><strong>Liên hệ & Chốt dòng xe:</strong> Quý khách tham khảo website, chọn loại xe tay ga hay xe số. Sau đó, gọi điện thoại trực tiếp hoặc add Zalo <span class="font-bold text-brand-600">0989.595.533</span> gửi định vị (Location).</li>
-                           <li><strong>Chuẩn bị xe & Giao hàng:</strong> Thợ máy của chúng tôi sẽ tiến hành test phanh, xi nhan, đèn còi lần cuối, bơm lốp đúng áp suất và rửa vỏ xe sạch sẽ trước khi nhân viên giao nhận chạy xe đến điểm hẹn của bạn.</li>
-                           <li><strong>Ký hợp đồng số & Nhận khóa:</strong> Khách hàng cung cấp Bản gốc CMND/CCCD gắn chip (hoặc Hộ Chiếu, Boarding Pass vé máy bay nếu là khách du lịch). Nhân viên chụp lại và gửi biên nhận qua Zalo. Bạn thanh toán tiền thuê và nhận khóa xe lên đường.</li>
-                       </ol>
-                       
-                       <div class="mt-6 p-4 bg-brand-50/50 dark:bg-gray-800/50 rounded-lg border border-brand-100 dark:border-gray-700">
-                           <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-2"><i class="fas fa-map-marked mr-2 text-brand-500"></i>Trạm Dừng Chân Lý Tưởng:</h3>
-                           <p class="text-sm text-gray-700 dark:text-gray-300">
-                               Trụ sở chính đặt tại <strong>24 Ngõ 5 Nguyễn Văn Cừ</strong>. Chỉ cách bến xe Gia Lâm 1km, cách chân cầu Chương Dương 300m. Từ đây, bạn chỉ việc vít ga qua cầu là thẳng tiến đến khu vực Hồ Gươm, Nhà hát lớn vô cùng tiện lợi.
-                           </p>
+           <!-- REVIEWS SECTION MỚI -->
+           <section id="reviews" class="space-y-8 pt-6">
+               <div class="text-center max-w-2xl mx-auto">
+                   <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-3">Khách Hàng Nói Gì Về Chúng Tôi?</h2>
+                   <p class="text-gray-600 dark:text-gray-400">Hàng ngàn chuyến đi an toàn và những nụ cười hài lòng là minh chứng rõ ràng nhất cho chất lượng dịch vụ tại Văn Chính.</p>
+               </div>
+
+               <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                   <!-- Review 1 -->
+                   <div class="glass-panel p-6 rounded-2xl flex flex-col relative">
+                       <i class="fas fa-quote-right absolute top-4 right-6 text-4xl text-gray-200 dark:text-gray-700/50"></i>
+                       <div class="flex items-center gap-1 text-yellow-400 text-sm mb-3">
+                           <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                       </div>
+                       <p class="text-gray-700 dark:text-gray-300 text-sm flex-1 mb-4 italic">
+                           "Mình là sinh viên thuê xe để đi làm thêm part-time theo tháng. Chú Chính hỗ trợ giá sinh viên rất tốt, xe Vision đi cực êm và tiết kiệm xăng. Đến tháng ra thay dầu chú còn không lấy tiền công."
+                       </p>
+                       <div class="flex items-center gap-3 mt-auto">
+                           <div class="w-10 h-10 rounded-full bg-blue-100 dark:bg-blue-900 flex items-center justify-center text-blue-600 font-bold">T</div>
+                           <div>
+                               <h4 class="font-bold text-gray-900 dark:text-white text-sm">Tuấn Anh</h4>
+                               <span class="text-xs text-gray-500">Sinh viên ĐH Kinh Tế Quốc Dân</span>
+                           </div>
                        </div>
                    </div>
-                   
-                   <div class="relative h-full min-h-[400px] glass-panel rounded-xl overflow-hidden shadow-lg group">
-                       <a href="https://www.google.com/maps/search/?api=1&query=21.0400942,105.8664156" target="_blank" rel="noopener noreferrer" class="block w-full h-full relative">
-                           <img src="https://i.imgur.com/H1g1Vz8.png" alt="Bản đồ chỉ đường đến cửa hàng cho thuê xe máy Hà Nội Văn Chính, 24 Ngõ 5 Nguyễn Văn Cừ" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
-                           <div class="absolute inset-0 bg-black/30 flex items-center justify-center group-hover:bg-black/40 transition-colors backdrop-blur-[2px]">
-                               <div class="bg-white/95 text-gray-900 px-6 py-3 rounded-full font-bold shadow-2xl transform group-hover:-translate-y-2 transition-transform backdrop-blur-md flex items-center gap-2">
-                                   <i class="fas fa-location-arrow text-brand-600 text-xl"></i> Nhấn Để Mở Google Maps Chỉ Đường
-                               </div>
+
+                   <!-- Review 2 -->
+                   <div class="glass-panel p-6 rounded-2xl flex flex-col relative md:translate-y-4">
+                       <i class="fas fa-quote-right absolute top-4 right-6 text-4xl text-gray-200 dark:text-gray-700/50"></i>
+                       <div class="flex items-center gap-1 text-yellow-400 text-sm mb-3">
+                           <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                       </div>
+                       <p class="text-gray-700 dark:text-gray-300 text-sm flex-1 mb-4 italic">
+                           "Nhóm mình từ Sài Gòn ra chơi, gọi điện cái là 15 phút sau nhân viên mang 3 chiếc Wave Alpha thẳng tới khách sạn ở Phố Cổ. Xe mới tinh, lốp bám đường tốt, đi Tam Đảo 2 ngày không một vết gợn."
+                       </p>
+                       <div class="flex items-center gap-3 mt-auto">
+                           <div class="w-10 h-10 rounded-full bg-pink-100 dark:bg-pink-900 flex items-center justify-center text-pink-600 font-bold">M</div>
+                           <div>
+                               <h4 class="font-bold text-gray-900 dark:text-white text-sm">Minh Hằng</h4>
+                               <span class="text-xs text-gray-500">Khách du lịch TP.HCM</span>
                            </div>
+                       </div>
+                   </div>
+
+                   <!-- Review 3 -->
+                   <div class="glass-panel p-6 rounded-2xl flex flex-col relative">
+                       <i class="fas fa-quote-right absolute top-4 right-6 text-4xl text-gray-200 dark:text-gray-700/50"></i>
+                       <div class="flex items-center gap-1 text-yellow-400 text-sm mb-3">
+                           <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                       </div>
+                       <p class="text-gray-700 dark:text-gray-300 text-sm flex-1 mb-4 italic">
+                           "Rất ấn tượng với quy trình làm việc. Mình cần xe AirBlade gấp để đi công tác dưới Hưng Yên. Chỉ cần để lại căn cước, ký hợp đồng trên điện thoại là nhận xe. Xe sạch sẽ, có sẵn áo mưa và xăng."
+                       </p>
+                       <div class="flex items-center gap-3 mt-auto">
+                           <div class="w-10 h-10 rounded-full bg-green-100 dark:bg-green-900 flex items-center justify-center text-green-600 font-bold">H</div>
+                           <div>
+                               <h4 class="font-bold text-gray-900 dark:text-white text-sm">Hoàng Hải</h4>
+                               <span class="text-xs text-gray-500">Người đi công tác</span>
+                           </div>
+                       </div>
+                   </div>
+
+                   <!-- Review 4 -->
+                   <div class="glass-panel p-6 rounded-2xl flex flex-col relative lg:translate-x-1/2 md:col-span-1 lg:col-span-1">
+                       <i class="fas fa-quote-right absolute top-4 right-6 text-4xl text-gray-200 dark:text-gray-700/50"></i>
+                       <div class="flex items-center gap-1 text-yellow-400 text-sm mb-3">
+                           <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                       </div>
+                       <p class="text-gray-700 dark:text-gray-300 text-sm flex-1 mb-4 italic">
+                           "Excellent service! The owner speaks basic English but is very helpful. Rented a scooter for a week to explore Hanoi. No hidden fees, passport deposit was safe. Highly recommend for expats."
+                       </p>
+                       <div class="flex items-center gap-3 mt-auto">
+                           <div class="w-10 h-10 rounded-full bg-orange-100 dark:bg-orange-900 flex items-center justify-center text-orange-600 font-bold">D</div>
+                           <div>
+                               <h4 class="font-bold text-gray-900 dark:text-white text-sm">David Smith</h4>
+                               <span class="text-xs text-gray-500">Giáo viên Tiếng Anh</span>
+                           </div>
+                       </div>
+                   </div>
+
+                   <!-- Review 5 -->
+                   <div class="glass-panel p-6 rounded-2xl flex flex-col relative lg:translate-x-1/2 md:translate-y-4 lg:translate-y-0">
+                       <i class="fas fa-quote-right absolute top-4 right-6 text-4xl text-gray-200 dark:text-gray-700/50"></i>
+                       <div class="flex items-center gap-1 text-yellow-400 text-sm mb-3">
+                           <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+                       </div>
+                       <p class="text-gray-700 dark:text-gray-300 text-sm flex-1 mb-4 italic">
+                           "Đêm qua xe mình bị thủng xăm ở tận cầu Vĩnh Tuy lúc 10h tối. Gọi hotline bên Văn Chính cho đội cứu hộ mang hẳn một con xe khác ra đổi luôn để mình về nhà an toàn. Quá tuyệt vời 10 điểm!"
+                       </p>
+                       <div class="flex items-center gap-3 mt-auto">
+                           <div class="w-10 h-10 rounded-full bg-purple-100 dark:bg-purple-900 flex items-center justify-center text-purple-600 font-bold">L</div>
+                           <div>
+                               <h4 class="font-bold text-gray-900 dark:text-white text-sm">Lan Phương</h4>
+                               <span class="text-xs text-gray-500">Khách hàng thuê ngày</span>
+                           </div>
+                       </div>
+                   </div>
+               </div>
+           </section>
+
+           <!-- Vị trí (Đã xoá map, căn giữa) -->
+           <section id="location" class="space-y-6 pt-6">
+               <div class="max-w-3xl mx-auto glass-panel p-8 rounded-2xl shadow-lg border-t-4 border-brand-500">
+                   <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-6 text-center">Quy Trình Giao Nhận Tốc Độ</h2>
+                   <p class="text-gray-600 dark:text-gray-300 text-center mb-8">Chúng tôi biết thời gian đi du lịch của bạn là vàng bạc. Quên đi những tờ khai giấy lằng nhằng, tại Văn Chính, bạn chỉ mất đúng 5 phút đồng hồ cho toàn bộ quy trình.</p>
+                   
+                   <div class="space-y-6 relative before:absolute before:inset-0 before:ml-5 before:-translate-x-px md:before:mx-auto md:before:translate-x-0 before:h-full before:w-0.5 before:bg-gradient-to-b before:from-transparent before:via-gray-300 dark:before:via-gray-600 before:to-transparent">
+                       <!-- Bước 1 -->
+                       <div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group is-active">
+                           <div class="flex items-center justify-center w-10 h-10 rounded-full border-4 border-white dark:border-gray-900 bg-brand-500 text-white font-bold shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 z-10">1</div>
+                           <div class="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] glass-panel p-4 rounded-xl shadow-sm">
+                               <h3 class="font-bold text-gray-900 dark:text-white mb-1">Liên hệ & Chốt dòng xe</h3>
+                               <p class="text-sm text-gray-600 dark:text-gray-400">Gọi hoặc nhắn Zalo <span class="font-bold text-brand-600">0989.595.533</span> gửi định vị, chọn xe tay ga hoặc số.</p>
+                           </div>
+                       </div>
+                       
+                       <!-- Bước 2 -->
+                       <div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group is-active">
+                           <div class="flex items-center justify-center w-10 h-10 rounded-full border-4 border-white dark:border-gray-900 bg-brand-500 text-white font-bold shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 z-10">2</div>
+                           <div class="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] glass-panel p-4 rounded-xl shadow-sm">
+                               <h3 class="font-bold text-gray-900 dark:text-white mb-1">Chuẩn bị xe & Giao hàng</h3>
+                               <p class="text-sm text-gray-600 dark:text-gray-400">Thợ test phanh, lốp, rửa sạch và giao xe đến tận nơi cho bạn trong 15 phút.</p>
+                           </div>
+                       </div>
+                       
+                       <!-- Bước 3 -->
+                       <div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group is-active">
+                           <div class="flex items-center justify-center w-10 h-10 rounded-full border-4 border-white dark:border-gray-900 bg-brand-500 text-white font-bold shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 z-10">3</div>
+                           <div class="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] glass-panel p-4 rounded-xl shadow-sm">
+                               <h3 class="font-bold text-gray-900 dark:text-white mb-1">Ký hợp đồng số & Nhận khóa</h3>
+                               <p class="text-sm text-gray-600 dark:text-gray-400">Chụp CCCD/Hộ chiếu gốc làm thủ tục điện tử, thanh toán và nhận khóa lên đường.</p>
+                           </div>
+                       </div>
+                   </div>
+
+                   <div class="mt-10 p-5 bg-brand-50/50 dark:bg-gray-800/80 rounded-xl border border-brand-200 dark:border-gray-700 text-center shadow-inner">
+                       <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-2"><i class="fas fa-map-marked-alt mr-2 text-brand-500 animate-pulse"></i>Trạm Dừng Chân Lý Tưởng:</h3>
+                       <p class="text-gray-700 dark:text-gray-300">
+                           Trụ sở chính: <strong>24 Ngõ 5 Nguyễn Văn Cừ, Long Biên</strong>. Cách bến xe Gia Lâm 1km, cách chân cầu Chương Dương 300m. 
+                       </p>
+                       <a href="https://www.google.com/maps/search/?api=1&query=21.0400942,105.8664156" target="_blank" rel="noopener noreferrer" class="inline-block mt-4 text-brand-600 dark:text-brand-400 font-bold hover:underline">
+                           <i class="fas fa-location-arrow mr-1"></i> Xem chỉ đường trên Google Maps
                        </a>
                    </div>
                </div>
            </section>
 
-           <!-- SEO ULTRA: Thêm mục "Cẩm nang" dưới dạng Accordion FAQ để tối ưu thêm hàng trăm từ khóa LSI về du lịch -->
-           <section id="faq" class="space-y-6">
-               <h2 class="text-3xl font-bold text-gray-900 dark:text-white border-l-4 border-brand-500 pl-4">Cẩm Nang & Kinh Nghiệm Phượt Hà Nội Bằng Xe Máy</h2>
-               <p class="text-gray-600 dark:text-gray-300">Hơn cả một dịch vụ <a href="faq.html" class="text-brand-600 hover:underline">cho thuê xe máy ở Hà Nội</a>, Văn Chính muốn trở thành người hướng dẫn viên bản địa tin cậy của bạn. Dưới đây là những "bí kíp" sinh tồn giao thông mà bất cứ ai cũng cần biết trước khi nổ máy dạo phố phường Thủ đô.</p>
+           <!-- FAQ Chuẩn hoá 5 câu -->
+           <section id="faq" class="space-y-6 pt-6">
+               <div class="text-center max-w-3xl mx-auto mb-8">
+                   <h2 class="text-3xl font-bold text-gray-900 dark:text-white">Cẩm Nang & Hỏi Đáp (FAQ)</h2>
+                   <p class="text-gray-600 dark:text-gray-300 mt-2">Hơn cả một dịch vụ thuê xe, Văn Chính gửi đến bạn những "bí kíp" sinh tồn giao thông tại thủ đô.</p>
+               </div>
                
-               <div class="glass-panel p-6 rounded-xl">
-                   <div class="grid gap-4">
-                       <details class="group bg-white/50 dark:bg-gray-800/50 rounded-lg border border-white/20 dark:border-gray-600/50 overflow-hidden">
-                           <summary class="flex justify-between items-center font-bold cursor-pointer p-4 hover:bg-white/80 dark:hover:bg-gray-700/80 transition-colors">
-                               <span class="text-gray-800 dark:text-gray-200"><i class="fas fa-traffic-light mr-2 text-red-500"></i>Văn hóa giao thông & Những khung giờ "Đại ác mộng" tắc đường?</span>
-                               <span class="transition group-open:rotate-180 text-gray-600 dark:text-gray-400"><i class="fas fa-chevron-down"></i></span>
-                           </summary>
-                           <div class="text-gray-600 dark:text-gray-400 p-4 pt-0 border-t border-white/20 dark:border-gray-600/50 mt-2 leading-relaxed">
-                               Giao thông Hà Nội rất đặc trưng. Mật độ xe máy cực kỳ dày đặc. Bạn tuyệt đối nên tránh di chuyển vào trung tâm thành phố (các trục đường như Nguyễn Trãi, Tây Sơn, ngã tư Sở) hoặc các cầu lớn nối hai bờ sông Hồng (như Cầu Chương Dương, Cầu Vĩnh Tuy) vào khung giờ cao điểm: Sáng từ 7h00 - 8h30 và Chiều tối từ 17h00 - 18h45. Đặc biệt lưu ý, vào thứ 6, thứ 7 và Chủ Nhật, khu vực Hồ Gươm và vùng lân cận sẽ biến thành phố đi bộ, cấm toàn bộ phương tiện cơ giới. Bạn cần chú ý đỗ xe tại các bãi gửi xe có vé niêm yết rõ ràng của nhà nước ven phố Hai Bà Trưng hoặc Lý Thái Tổ.
-                           </div>
-                       </details>
-                       
-                       <details class="group bg-white/50 dark:bg-gray-800/50 rounded-lg border border-white/20 dark:border-gray-600/50 overflow-hidden">
-                           <summary class="flex justify-between items-center font-bold cursor-pointer p-4 hover:bg-white/80 dark:hover:bg-gray-700/80 transition-colors">
-                               <span class="text-gray-800 dark:text-gray-200"><i class="fas fa-id-card mr-2 text-blue-500"></i>Giấy tờ bắt buộc cần cung cấp cho cửa hàng thuê xe là gì?</span>
-                               <span class="transition group-open:rotate-180 text-gray-600 dark:text-gray-400"><i class="fas fa-chevron-down"></i></span>
-                           </summary>
-                           <div class="text-gray-600 dark:text-gray-400 p-4 pt-0 border-t border-white/20 dark:border-gray-600/50 mt-2 leading-relaxed">
-                               Đơn vị chúng tôi áp dụng chính sách cọc nhẹ, nên giấy tờ thay thế cọc tiền mặt là vô cùng quan trọng. Bạn chỉ cần bàn giao Bản gốc Chứng minh nhân dân (CMND) hoặc Căn cước công dân (CCCD) gắn chip hợp lệ. Đối với người nước ngoài hoặc Việt Kiều, chúng tôi giữ Hộ Chiếu (Passport) gốc. Ngoài ra, bạn cần xuất trình thêm Giấy phép lái xe (GPLX hạng A1 hoặc A2) để nhân viên đối chiếu, đảm bảo bạn đủ điều kiện tham gia giao thông an toàn theo luật pháp Việt Nam.
-                           </div>
-                       </details>
+               <div class="max-w-3xl mx-auto space-y-4">
+                   <!-- Câu 1 -->
+                   <details class="group glass-panel rounded-xl overflow-hidden shadow-sm" open>
+                       <summary class="flex justify-between items-center font-bold cursor-pointer p-5 hover:bg-white/40 dark:hover:bg-gray-700/40 transition-colors list-none outline-none">
+                           <span class="text-gray-900 dark:text-white text-lg"><i class="fas fa-traffic-light mr-3 text-red-500"></i>Văn hóa giao thông & Những khung giờ "tắc đường"?</span>
+                           <span class="transition-transform duration-300 group-open:rotate-180 text-gray-400"><i class="fas fa-chevron-down"></i></span>
+                       </summary>
+                       <div class="text-gray-600 dark:text-gray-300 p-5 pt-0 border-t border-gray-200/50 dark:border-gray-700/50 mt-2 leading-relaxed">
+                           Giao thông Hà Nội rất đặc trưng. Bạn tuyệt đối nên tránh di chuyển vào trung tâm thành phố hoặc các cầu lớn vào khung giờ cao điểm: Sáng từ 7h00 - 8h30 và Chiều tối từ 17h00 - 18h45. Lưu ý, vào tối T6, T7 và CN, khu vực Hồ Gươm cấm phương tiện cơ giới để làm phố đi bộ.
+                       </div>
+                   </details>
+                   
+                   <!-- Câu 2 -->
+                   <details class="group glass-panel rounded-xl overflow-hidden shadow-sm">
+                       <summary class="flex justify-between items-center font-bold cursor-pointer p-5 hover:bg-white/40 dark:hover:bg-gray-700/40 transition-colors list-none outline-none">
+                           <span class="text-gray-900 dark:text-white text-lg"><i class="fas fa-id-card mr-3 text-blue-500"></i>Giấy tờ bắt buộc cần cung cấp cho cửa hàng là gì?</span>
+                           <span class="transition-transform duration-300 group-open:rotate-180 text-gray-400"><i class="fas fa-chevron-down"></i></span>
+                       </summary>
+                       <div class="text-gray-600 dark:text-gray-300 p-5 pt-0 border-t border-gray-200/50 dark:border-gray-700/50 mt-2 leading-relaxed">
+                           Chúng tôi áp dụng chính sách cọc nhẹ. Bạn cần bàn giao Bản gốc Chứng minh nhân dân (CMND) hoặc Căn cước công dân (CCCD) gắn chip hợp lệ. Đối với khách nước ngoài, chúng tôi giữ Hộ Chiếu (Passport) gốc. Ngoài ra, bạn cần xuất trình thêm Giấy phép lái xe để đối chiếu.
+                       </div>
+                   </details>
 
-                       <details class="group bg-white/50 dark:bg-gray-800/50 rounded-lg border border-white/20 dark:border-gray-600/50 overflow-hidden">
-                           <summary class="flex justify-between items-center font-bold cursor-pointer p-4 hover:bg-white/80 dark:hover:bg-gray-700/80 transition-colors">
-                               <span class="text-gray-800 dark:text-gray-200"><i class="fas fa-gas-pump mr-2 text-orange-500"></i>Kinh nghiệm đổ xăng và đỗ xe tại khu vực Phố Cổ Hà Nội?</span>
-                               <span class="transition group-open:rotate-180 text-gray-600 dark:text-gray-400"><i class="fas fa-chevron-down"></i></span>
-                           </summary>
-                           <div class="text-gray-600 dark:text-gray-400 p-4 pt-0 border-t border-white/20 dark:border-gray-600/50 mt-2 leading-relaxed">
-                               <strong>Về xăng cộ:</strong> Cây xăng ở trung tâm Hoàn Kiếm không nhiều. Hai trạm xăng uy tín và dễ tìm nhất là Cây xăng Trần Quang Khải (ngay bến xe buýt) và Cây xăng Hàng Bún. Luôn đổ đầy bình trước khi bắt đầu hành trình dài.
-                               <br><br>
-                               <strong>Về bãi đỗ xe:</strong> Phố Cổ có hàng ngàn con ngõ nhỏ và đường một chiều. Tuyệt đối không để xe dưới lòng đường không có vạch kẻ hoặc trên vỉa hè dành cho người đi bộ nếu không muốn xe bị Công an phường cẩu đi. Hãy luôn hỏi chủ quán ăn, tiệm cafe nơi để xe, hoặc gửi vào các bãi trông giữ xe (giá chung từ 5.000đ - 10.000đ/lượt ban ngày).
-                           </div>
-                       </details>
-                       
-                       <details class="group bg-white/50 dark:bg-gray-800/50 rounded-lg border border-white/20 dark:border-gray-600/50 overflow-hidden">
-                           <summary class="flex justify-between items-center font-bold cursor-pointer p-4 hover:bg-white/80 dark:hover:bg-gray-700/80 transition-colors">
-                               <span class="text-gray-800 dark:text-gray-200"><i class="fas fa-road mr-2 text-gray-500"></i>Nên thuê xe ga hay xe số khi đi phượt vùng ven (Ba Vì, Sóc Sơn)?</span>
-                               <span class="transition group-open:rotate-180 text-gray-600 dark:text-gray-400"><i class="fas fa-chevron-down"></i></span>
-                           </summary>
-                           <div class="text-gray-600 dark:text-gray-400 p-4 pt-0 border-t border-white/20 dark:border-gray-600/50 mt-2 leading-relaxed">
-                               Đây là câu hỏi kinh điển! Nếu bạn chỉ có ý định dạo quanh trung tâm, đi ăn lẩu nướng vỉa hè, lượn hồ Tây hóng gió, xe tay ga (như Vision, Air Blade) là lựa chọn số 1 vì tính thời trang, cốp rộng để túi xách an toàn và không lo bẩn giày. 
-                               Tuy nhiên, nếu lịch trình của bạn bao gồm việc leo núi Vườn Quốc Gia Ba Vì, cắm trại núi Hàm Lợn (Sóc Sơn) hay đi đèo Tam Đảo, chúng tôi đặc biệt khuyến cáo bạn <strong>phải thuê xe số</strong> (Honda Wave, Sirius). Xe số sử dụng hộp số bánh răng, có phanh số an toàn tuyệt đối khi đổ đèo, giúp tránh hiện tượng cháy phanh, mất phanh cực kỳ nguy hiểm như khi dùng xe tay ga trên địa hình dốc đứng.
-                           </div>
-                       </details>
-                   </div>
+                   <!-- Câu 3 -->
+                   <details class="group glass-panel rounded-xl overflow-hidden shadow-sm">
+                       <summary class="flex justify-between items-center font-bold cursor-pointer p-5 hover:bg-white/40 dark:hover:bg-gray-700/40 transition-colors list-none outline-none">
+                           <span class="text-gray-900 dark:text-white text-lg"><i class="fas fa-gas-pump mr-3 text-orange-500"></i>Kinh nghiệm đổ xăng và đỗ xe tại khu vực Phố Cổ?</span>
+                           <span class="transition-transform duration-300 group-open:rotate-180 text-gray-400"><i class="fas fa-chevron-down"></i></span>
+                       </summary>
+                       <div class="text-gray-600 dark:text-gray-300 p-5 pt-0 border-t border-gray-200/50 dark:border-gray-700/50 mt-2 leading-relaxed">
+                           <strong>Về xăng cộ:</strong> Cây xăng ở trung tâm không nhiều. Hai trạm dễ tìm nhất là Cây xăng Trần Quang Khải và Cây xăng Hàng Bún.<br>
+                           <strong>Về đỗ xe:</strong> Tuyệt đối không để xe dưới lòng đường không vạch kẻ hoặc vỉa hè để tránh bị cẩu xe. Hãy gửi vào các bãi trông xe có vé (giá từ 5.000đ - 10.000đ/lượt).
+                       </div>
+                   </details>
+                   
+                   <!-- Câu 4 -->
+                   <details class="group glass-panel rounded-xl overflow-hidden shadow-sm">
+                       <summary class="flex justify-between items-center font-bold cursor-pointer p-5 hover:bg-white/40 dark:hover:bg-gray-700/40 transition-colors list-none outline-none">
+                           <span class="text-gray-900 dark:text-white text-lg"><i class="fas fa-road mr-3 text-gray-500"></i>Nên thuê xe ga hay xe số khi đi phượt vùng ven?</span>
+                           <span class="transition-transform duration-300 group-open:rotate-180 text-gray-400"><i class="fas fa-chevron-down"></i></span>
+                       </summary>
+                       <div class="text-gray-600 dark:text-gray-300 p-5 pt-0 border-t border-gray-200/50 dark:border-gray-700/50 mt-2 leading-relaxed">
+                           Nếu đi dạo nội thành, xe tay ga (Vision, Air Blade) là lựa chọn số 1 vì cốp rộng. Nhưng nếu leo núi Vườn Quốc Gia Ba Vì, cắm trại Sóc Sơn hay đi đèo Tam Đảo, chúng tôi đặc biệt khuyến cáo bạn <strong>phải thuê xe số</strong> (Wave, Sirius) để dùng phanh số an toàn tuyệt đối khi đổ đèo.
+                       </div>
+                   </details>
+
+                   <!-- Câu 5 (Thêm mới theo chuẩn hoá) -->
+                   <details class="group glass-panel rounded-xl overflow-hidden shadow-sm">
+                       <summary class="flex justify-between items-center font-bold cursor-pointer p-5 hover:bg-white/40 dark:hover:bg-gray-700/40 transition-colors list-none outline-none">
+                           <span class="text-gray-900 dark:text-white text-lg"><i class="fas fa-tools mr-3 text-brand-500"></i>Gặp sự cố trên đường (Xịt lốp, chết máy) xử lý thế nào?</span>
+                           <span class="transition-transform duration-300 group-open:rotate-180 text-gray-400"><i class="fas fa-chevron-down"></i></span>
+                       </summary>
+                       <div class="text-gray-600 dark:text-gray-300 p-5 pt-0 border-t border-gray-200/50 dark:border-gray-700/50 mt-2 leading-relaxed">
+                           Mặc dù xe được bảo dưỡng kỹ, nhưng nếu chẳng may dính đinh thủng lốp, bạn cứ tìm tiệm sửa xe gần nhất vá (giá khoảng 20k-30k). Nếu xe gặp sự cố máy móc nặng không thể di chuyển, hãy dắt vào lề đường và gọi ngay <strong>Hotline: 0989.595.533</strong>. Chúng tôi có đội cơ động trực tuyến 24/7 sẵn sàng mang xe khác đến đổi tận nơi miễn phí cho bạn.
+                       </div>
+                   </details>
                </div>
            </section>
            
-           <section class="glass-panel bg-gradient-to-r from-brand-600/90 to-indigo-700/90 rounded-2xl p-8 text-center text-white shadow-xl relative overflow-hidden border-none">
+           <section class="glass-panel bg-gradient-to-r from-brand-600/90 to-indigo-700/90 rounded-2xl p-8 text-center text-white shadow-xl relative overflow-hidden border-none mt-12">
                <div class="absolute top-0 right-0 -mt-4 -mr-4 w-24 h-24 bg-white opacity-20 rounded-full blur-xl"></div>
                <div class="absolute bottom-0 left-0 -mb-4 -ml-4 w-32 h-32 bg-yellow-400 opacity-20 rounded-full blur-xl"></div>
                
