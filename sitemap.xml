@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset
+  xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  
+  <!-- Homepage -->
+  <url>
+    <loc>https://chothuexemayohanoi.github.io/vanchinh/</loc>
+    <lastmod>2026-03-07</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.00</priority>
+    <image:image>
+      <image:loc>https://raw.githubusercontent.com/chothuexemayohanoi/vanchinh/refs/heads/main/IMG_0995.png</image:loc>
+      <image:caption>Cho thuê xe máy Hà Nội - Văn Chính</image:caption>
+    </image:image>
+  </url>
+
+  <!-- Giới thiệu / Giá / Trang dịch vụ -->
+  <url>
+    <loc>https://chothuexemayohanoi.github.io/vanchinh/gioithieu.html</loc>
+    <lastmod>2026-03-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+  </url>
+
+  <url>
+    <loc>https://chothuexemayohanoi.github.io/vanchinh/banggia.html</loc>
+    <lastmod>2026-03-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+
+  <!-- Khu vực phục vụ -->
+  <url>
+    <loc>https://chothuexemayohanoi.github.io/vanchinh/longbien.html</loc>
+    <lastmod>2026-03-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.70</priority>
+  </url>
+  <url>
+    <loc>https://chothuexemayohanoi.github.io/vanchinh/gialam.html</loc>
+    <lastmod>2026-03-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.65</priority>
+  </url>
+  <url>
+    <loc>https://chothuexemayohanoi.github.io/vanchinh/hoankiem.html</loc>
+    <lastmod>2026-03-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.65</priority>
+  </url>
+  <url>
+    <loc>https://chothuexemayohanoi.github.io/vanchinh/phoco.html</loc>
+    <lastmod>2026-03-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.65</priority>
+  </url>
+  <url>
+    <loc>https://chothuexemayohanoi.github.io/vanchinh/badinh.html</loc>
+    <lastmod>2026-03-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.60</priority>
+  </url>
+  <url>
+    <loc>https://chothuexemayohanoi.github.io/vanchinh/tayho.html</loc>
+    <lastmod>2026-03-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.60</priority>
+  </url>
+  <url>
+    <loc>https://chothuexemayohanoi.github.io/vanchinh/haibatrung.html</loc>
+    <lastmod>2026-03-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.60</priority>
+  </url>
+
+  <!-- Loại xe / Hình thức thuê -->
+  <url>
+    <loc>https://chothuexemayohanoi.github.io/vanchinh/xedien.html</loc>
+    <lastmod>2026-03-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.60</priority>
+  </url>
+  <url>
+    <loc>https://chothuexemayohanoi.github.io/vanchinh/thuengay.html</loc>
+    <lastmod>2026-03-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.55</priority>
+  </url>
+  <url>
+    <loc>https://chothuexemayohanoi.github.io/vanchinh/thuetuan.html</loc>
+    <lastmod>2026-03-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.55</priority>
+  </url>
+  <url>
+    <loc>https://chothuexemayohanoi.github.io/vanchinh/thuethang.html</loc>
+    <lastmod>2026-03-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.55</priority>
+  </url>
+
+  <!-- Hỗ trợ / Chính sách / FAQ / Liên hệ -->
+  <url>
+    <loc>https://chothuexemayohanoi.github.io/vanchinh/faq.html</loc>
+    <lastmod>2026-03-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.50</priority>
+  </url>
+  <url>
+    <loc>https://chothuexemayohanoi.github.io/vanchinh/baomat.html</loc>
+    <lastmod>2026-03-07</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.40</priority>
+  </url>
+  <url>
+    <loc>https://chothuexemayohanoi.github.io/vanchinh/chinhsach.html</loc>
+    <lastmod>2026-03-07</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.40</priority>
+  </url>
+  <url>
+    <loc>https://chothuexemayohanoi.github.io/vanchinh/lienhe.html</loc>
+    <lastmod>2026-03-07</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.40</priority>
+  </url>
+
+  <!-- Thủ tục / Điều khoản -->
+  <url>
+    <loc>https://chothuexemayohanoi.github.io/vanchinh/thutuc.html</loc>
+    <lastmod>2026-03-07</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.45</priority>
+  </url>
+  <url>
+    <loc>https://chothuexemayohanoi.github.io/vanchinh/dieukhoan.html</loc>
+    <lastmod>2026-03-07</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.45</priority>
+  </url>
+
+</urlset>
